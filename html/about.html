@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Vinegar Food Restaurant (JADONS Ltd)</title>
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --maroon: #5e0b15; 
+            --wine: #800020;
+            --charcoal: #121212;
+            --gold: #c5a059;
+            --white: #ffffff;
+            --light-gray: #f8f8f8;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--white);
+            color: var(--charcoal);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, .navbar-brand-text { 
+            font-family: 'Playfair Display', serif;
+        }
+
+
+        #preloader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: var(--charcoal);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center; 
+        }
+        .preloader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .preloader-logo-container {
+            margin-bottom: 15px; 
+        }
+        .preloader-logo-container img {
+            height: 80px; 
+            max-width: 100%;
+            
+        }
+        .preloader-name {
+            color: var(--white);
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 5px;
+            animation: fadeInOut 3s ease-in-out infinite;
+        }
+        @keyframes fadeInOut { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+
+        .loader-line {
+            width: 150px;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .loader-line::after {
+            content: '';
+            position: absolute;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            animation: lineMove 2s linear infinite;
+        }
+        @keyframes lineMove { 0% { left: -100%; } 100% { left: 100%; } }
+
+        
+        .navbar {
+            transition: all 0.5s ease;
+            padding: 20px 0;
+            background: transparent;
+        }
+        .navbar.scrolled {
+            background-color: var(--charcoal) !important;
+            padding: 10px 0;
+            border-bottom: 2px solid var(--maroon);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex; 
+            align-items: center;
+            gap: 10px; 
+            text-decoration: none; 
+        }
+        .navbar-brand img {
+            height: 40px; 
+        
+        }
+        .navbar-brand-text {
+            color: var(--white) !important; 
+        }
+        .nav-link {
+            color: var(--white) !important;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin: 0 10px;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            animation: fadeIn 2s ease-in;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    
+        .section-padding { padding: 100px 0; }
+        .section-title { color: var(--maroon); font-weight: 700; margin-bottom: 30px; }
+
+        
+        .about-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-left: 10px solid var(--maroon);
+        }
+
+    
+        .history-box {
+            border-left: 2px solid var(--maroon);
+            padding-left: 30px;
+            margin-bottom: 40px;
+        }
+
+    
+        .value-card {
+            border: none;
+            padding: 40px;
+            background: var(--light-gray);
+            transition: transform 0.4s ease;
+            height: 100%;
+        }
+        .value-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .value-card i { color: var(--maroon); font-size: 2.5rem; margin-bottom: 20px; }
+
+        
+        .bg-stats {
+            background-color: var(--charcoal);
+            color: var(--white);
+            padding: 80px 0;
+        }
+        .stat-number { font-size: 3rem; font-weight: 700; color: var(--gold); }
+
+        
+        footer {
+            background-color: var(--charcoal);
+            color: #888;
+            padding: 80px 0 30px;
+        }
+        .footer-logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif; 
+            display: flex; 
+            align-items: center;
+            gap: 10px; 
+        }
+        .footer-logo img {
+            height: 40px; 
+            
+        }
+        .footer-logo-text {
+            color: var(--white); 
+        }
+        .footer-links a { color: #888; text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
+        .footer-links a:hover { color: var(--gold); }
+
+        
+        #scrollTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--maroon);
+            color: white;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+            border: none;
+            transition: 0.3s;
+        }
+        #scrollTop:hover { background: var(--gold); }
+
+        @media (max-width: 991px) {
+            .navbar-brand { position: relative; left: 0; transform: none; }
+            .navbar-nav { background: var(--charcoal); padding: 20px; text-align: center; }
+            .hero-title { font-size: 2.5rem; }
+            .navbar-brand img { height: 30px; } 
+            .preloader-logo-container img { height: 60px; }
+        }
+        
+.hero-section {
+    min-height: 100vh;
+    height: auto;
+    padding: 120px 20px;
+}
+
+
+.about-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+}
+
+
+@media (max-width: 991px) {
+    .about-image {
+        margin-top: 30px;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    footer .text-end {
+        text-align: center !important;
+        margin-top: 20px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo-container">
+                <img src="../images/logo.png" alt="Vinegar Logo" onerror="this.onerror=null;this.src='https:via.placeholder.com/80x80.png?text=LOGO'" />
+            </div>
+            <div class="preloader-name">VINEGAR</div>
+            <div class="loader-line"></div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
+                </ul>
+                <a class="navbar-brand" href="#">
+                    <img src="../images/logo.png" alt="Vinegar Logo" onerror="this.onerror=null;this.src='https:via.placeholder.com/40x40.png?text=LOGO'" />
+                    <span class="navbar-brand-text">VINEGAR</span>
+                </a>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Catering</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Recipe</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Awards</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">A Legacy of Taste, Luxury & Excellence</h1>
+        </div>
+    </header>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title">The Flagship of JADONS Ltd</h2>
+                    <p class="lead">Vinegar Food Restaurant is the premier flagship brand of JADONS Ltd, established with a vision to deliver world-class hospitality.</p>
+                    <p>With decades of excellence, we have become a trusted name in the premium dining industry. Our presence across the country is a testament to our commitment to quality, consistency, and the authentic art of fine dining.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1000&auto=format&fit=crop" class="about-image" alt="Restaurant Interior">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-light">
+        <div class="container">
+            <h2 class="text-center section-title">Our History & Journey</h2>
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <div class="history-box">
+                        <h4>Founding Vision</h4>
+                        <p>Starting as a single boutique outlet, our founding vision was to bring elite culinary standards to every plate. Over decades, this vision has transformed into a national legacy.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="history-box">
+                        <h4>Massive Expansion</h4>
+                        <p>With over 1000+ branches nationwide, JADONS Ltd has ensured that Vinegar Food Restaurant remains synonymous with quality, consistency, and premium hospitality.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="text-center section-title">Our Core Values</h2>
+            <div class="row g-4 mt-4">
+                <div class="col-md-3">
+                    <div class="value-card text-center">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                        <h5>Quality Ingredients</h5>
+                        <p class="small">We use only the finest, freshest ingredients sourced from trusted partners.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="value-card text-center">
+                        <i class="fa-solid fa-face-smile"></i>
+                        <h5>Customer Satisfaction</h5>
+                        <p class="small">Our guests are at the heart of everything we do, every single day.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="value-card text-center">
+                        <i class="fa-solid fa-hand-sparkles"></i>
+                        <h5>Hygiene & Safety</h5>
+                        <p class="small">Maintaining international food safety standards in every kitchen.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="value-card text-center">
+                        <i class="fa-solid fa-fire-burner"></i>
+                        <h5>Innovation in Taste</h5>
+                        <p class="small">Constantly evolving our menus to bring you modern culinary delights.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-stats text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-number">1000+</div>
+                    <p class="text-uppercase small">Branches</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-number">72</div>
+                    <p class="text-uppercase small">Rotating Menus</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-number">240K+</div>
+                    <p class="text-uppercase small">Delicacies</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-number">Millions</div>
+                    <p class="text-uppercase small">Happy Clients</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1000&q=80"
+ class="about-image" alt="Professional Chefs in Kitchen">
+                </div>
+                <div class="col-lg-6 ps-lg-5">
+                    <h2 class="section-title">Culinary Leadership</h2>
+                    <p>Our kitchen is managed by world-class expert chefs who adhere to the strictest international food standards. Our professional kitchen teams work tirelessly to ensure that Vinegar Food Restaurant remains at the cutting edge of the culinary world.</p>
+                    <p>Every dish is a result of professional expertise and a passion for excellence that JADONS Ltd is known for.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-light">
+        <div class="container">
+            <h2 class="text-center section-title">Why People Trust Us</h2>
+            <div class="row mt-5 text-center g-4">
+                <div class="col-md-4">
+                    <i class="fa-solid fa-award mb-3 fs-3 text-maroon"></i>
+                    <h6>Decades of Experience</h6>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa-solid fa-check-double mb-3 fs-3 text-maroon"></i>
+                    <h6>Consistent Quality</h6>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa-solid fa-plate-wheat mb-3 fs-3 text-maroon"></i>
+                    <h6>Premium Presentation</h6>
+                </div>
+                <div class="col-md-4 offset-md-2">
+                    <i class="fa-solid fa-building-columns mb-3 fs-3 text-maroon"></i>
+                    <h6>Large-scale Operations</h6>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa-solid fa-star mb-3 fs-3 text-maroon"></i>
+                    <h6>Trusted Hospitality Brand</h6>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="footer-logo">
+                        <img src="../images/logo.png" alt="Vinegar Logo" style="height: 40px;" onerror="this.onerror=null;this.src='https:via.placeholder.com/40x40.png?text=LOGO'" />
+                        <span class="footer-logo-text">VINEGAR FOOD</span>
+                    </h5>
+                    <p>The flagship brand of JADONS Ltd, delivering premium dining and corporate hospitality across the country for over three decades.</p>
+                </div>
+                <div class="col-lg-4 mb-4 text-center">
+                    <h6>Quick Links</h6>
+                    <div class="footer-links">
+                        <a href="#">Home</a> | <a href="#">About</a> | <a href="#">Menu</a> | <a href="#">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4 text-end">
+                    <h6>Contact Info</h6>
+                    <p class="small">JADONS Ltd HQ, Corporate Plaza<br>
+                    Phone: +1 800 555 9999<br>
+                    Email: info@vinegarfood.com</p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center small">
+                &copy; 2026 Vinegar Food Restaurant | JADONS Ltd Group.
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollTop"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(window).on('load', function() {
+            setTimeout(function() {
+                $('#preloader').fadeOut('slow');
+            }, 1500);
+        });
+
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.navbar').addClass('scrolled');
+                } else {
+                    $('.navbar').removeClass('scrolled');
+                }
+                if ($(this).scrollTop() > 300) {
+                    $('#scrollTop').fadeIn().css('display', 'flex');
+                } else {
+                    $('#scrollTop').fadeOut();
+                }
+            });
+
+            $('#scrollTop').click(function() {
+                $('html, body').animate({ scrollTop: 0 }, 600);
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>
