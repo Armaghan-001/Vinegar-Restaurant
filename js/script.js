@@ -1,61 +1,56 @@
-$(document).ready(function() {
-    
-    
-    setTimeout(function() {
-        $('#preloader').fadeOut('slow', function() {
-            $('body').css('overflow', 'auto');
-        });
-    }, 2500); 
+// 2. NAVBAR TRANSPARENCY LOGICy
+// NAVBAR SCROLL EFFECT
+const nav = document.getElementById('mainNav');
 
-    
-    const dateInput = document.querySelector('.date-no-year');
-    if (dateInput) {
-        
-        dateInput.style.color = "rgba(255,255,255,0.7)";
-        
-        dateInput.addEventListener('change', function() {
-            if (this.value) {
-                this.style.color = "#ffffff"; 
-            }
-        });
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        nav.classList.add('nav-scrolled');
+    } else {
+        nav.classList.remove('nav-scrolled');
     }
-
-    
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 50) {
-            $('.navbar').addClass('scrolled');
-        } else {
-            $('.navbar').removeClass('scrolled');
-        }
-    });
-
-    
-    var scrollBtn = $('#scrollToTop');
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 300) {
-            scrollBtn.addClass('active');
-        } else {
-            scrollBtn.removeClass('active');
-        }
-    });
-
-    scrollBtn.click(function() {
-        $('html, body').animate({scrollTop: 0}, 800);
-        return false;
-    });
-
-    
-    function reveal() {
-        var reveals = document.querySelectorAll(".reveal");
-        for (var i = 0; i < reveals.length; i++) {
-            var windowHeight = window.innerHeight;
-            var elementTop = reveals[i].getBoundingClientRect().top;
-            var elementVisible = 150;
-            if (elementTop < windowHeight - elementVisible) {
-                reveals[i].classList.add("active");
-            }
-        }
-    }
-    window.addEventListener("scroll", reveal);
-    reveal(); 
 });
+// 3. MOVING DOT (MAGNETIC DOT) LOGIC
+const navItems = document.querySelectorAll('.navbar-nav .nav-item');
+const dot = document.querySelector('.nav-dot');
+
+function moveDot(element) {
+    if(!dot) return; // Agar dot nahi mila to error na aaye
+    const itemWidth = element.offsetWidth;
+    const itemLeft = element.offsetLeft;
+
+    // Dot ko item ke center mein lane ki calculation
+    const dotPos = itemLeft + (itemWidth / 2) - 4; 
+
+    dot.style.transform = `translateX(${dotPos}px)`;
+    dot.style.opacity = "1";
+}
+
+// Mouse movement par dot ko hilana
+navItems.forEach(item => {
+    item.addEventListener('mouseenter', () => moveDot(item));
+});
+
+// Jab mouse navbar se bahar jaye to pehle link (Home) par wapas jaye
+const navBarUl = document.querySelector('.navbar-nav');
+if(navBarUl) {
+    navBarUl.addEventListener('mouseleave', () => {
+        moveDot(navItems[0]);
+    });
+}
+
+// Page load hote hi dot ko Home par set karna
+document.addEventListener('DOMContentLoaded', () => {
+    if(navItems.length > 0) {
+        setTimeout(() => moveDot(navItems[0]), 100); // Thora delay taake width sahi calculate ho
+    }
+});
+
+function scrollManual(distance) {
+    const scroller = document.getElementById('topScroller');
+    if (scroller) {
+        scroller.scrollBy({
+            left: distance,
+            behavior: 'smooth'
+        });
+    }
+}
