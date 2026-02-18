@@ -4,34 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Vinegar Food Restaurant (JADONS Ltd)</title>
-   
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --maroon: #5e0b15; 
+            --maroon: #5e0b15; /* EXACT COLOR FROM CATERING PAGE */
             --wine: #800020;
-            --charcoal: #121212;
+            --charcoal: #121212; /* EXACT COLOR FROM CATERING PAGE */
             --gold: #c5a059;
             --white: #ffffff;
-            --light-gray: #f8f8f8;
+            --light-gray: #f8f8f8; /* EXACT BG FROM CATERING PAGE */
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: var(--white);
             color: var(--charcoal);
             overflow-x: hidden;
             line-height: 1.7;
         }
 
-        h1, h2, h3, h4, .navbar-brand-text { 
+        h1, h2, h3, h4, .navbar-brand-text { /* Added navbar-brand-text for custom styling */
             font-family: 'Playfair Display', serif;
         }
 
-
+        /* 1. PRELOADER */
         #preloader {
             position: fixed;
             top: 0; left: 0;
@@ -42,7 +42,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center; 
+            text-align: center; /* Center content horizontally */
         }
         .preloader-content {
             display: flex;
@@ -50,12 +50,13 @@
             align-items: center;
         }
         .preloader-logo-container {
-            margin-bottom: 15px; 
+            margin-bottom: 15px; /* Space between logo and name */
         }
         .preloader-logo-container img {
-            height: 80px; 
+            height: 80px; /* Adjust logo size in preloader */
             max-width: 100%;
-            
+            /* filter: invert(1); */ /* Apply if your logo is dark and needs to be white on dark background */
+            animation: fadeInOut 3s ease-in-out infinite;
         }
         .preloader-name {
             color: var(--white);
@@ -85,60 +86,67 @@
         }
         @keyframes lineMove { 0% { left: -100%; } 100% { left: 100%; } }
 
-        
-        .navbar {
-            transition: all 0.5s ease;
-            padding: 20px 0;
-            background: transparent;
-        }
-        .navbar.scrolled {
-            background-color: var(--charcoal) !important;
-            padding: 10px 0;
-            border-bottom: 2px solid var(--maroon);
-        }
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.8rem;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex; 
-            align-items: center;
-            gap: 10px; 
-            text-decoration: none; 
-        }
-        .navbar-brand img {
-            height: 40px; 
-        
-        }
-        .navbar-brand-text {
-            color: var(--white) !important; 
-        }
-        .nav-link {
-            color: var(--white) !important;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            margin: 0 10px;
-            position: relative;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--gold);
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after { width: 100%; }
+        /* 2. FIXED NAVBAR */
+        /* ===== VINEGAR LUXURY NAVBAR ===== */
 
-        
+.vinegar-navbar{
+  background: rgba(0,0,0,0.25);
+  padding: 14px 0;
+  transition: 0.4s;
+}
+
+.vinegar-navbar.scrolled{
+  background:#111;
+  border-bottom:2px solid #8B0000;
+}
+
+.logo-img{
+  height:55px;
+}
+
+.logo-text{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+  color:#C19A6B;
+  letter-spacing:2px;
+}
+
+/* ===== EXACT CATERING NAVBAR HOVER ===== */
+
+.navbar .nav-link{
+    color: #ffffff !important;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 10px;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.navbar .nav-link:hover{
+    color: #C19A6B !important;
+}
+
+.navbar .nav-link::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #C19A6B;
+    transition: width 0.3s ease;
+}
+
+.navbar .nav-link:hover::after{
+    width: 100%;
+}
+
+        /* 3. HERO HEADER */
         .hero-section {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1920&auto=format&fit=crop');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1920&auto=format&fit=crop'); /* Verified URL */
             background-size: cover;
             background-position: center;
             display: flex;
@@ -155,11 +163,11 @@
         }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    
+        /* General Section Styling */
         .section-padding { padding: 100px 0; }
         .section-title { color: var(--maroon); font-weight: 700; margin-bottom: 30px; }
 
-        
+        /* 4. ABOUT CONTENT */
         .about-image {
             width: 100%;
             height: 500px;
@@ -167,14 +175,14 @@
             border-left: 10px solid var(--maroon);
         }
 
-    
+        /* 5. HISTORY */
         .history-box {
             border-left: 2px solid var(--maroon);
             padding-left: 30px;
             margin-bottom: 40px;
         }
 
-    
+        /* 6. PHILOSOPHY CARDS */
         .value-card {
             border: none;
             padding: 40px;
@@ -185,7 +193,7 @@
         .value-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         .value-card i { color: var(--maroon); font-size: 2.5rem; margin-bottom: 20px; }
 
-        
+        /* 7. ACHIEVEMENTS (Stats) */
         .bg-stats {
             background-color: var(--charcoal);
             color: var(--white);
@@ -193,32 +201,32 @@
         }
         .stat-number { font-size: 3rem; font-weight: 700; color: var(--gold); }
 
-        
+        /* 10. FOOTER */
         footer {
             background-color: var(--charcoal);
             color: #888;
             padding: 80px 0 30px;
         }
-        .footer-logo {
-            color: var(--white);
-            font-size: 1.5rem;
+        .footer-logo { 
+            color: var(--white); 
+            font-size: 1.5rem; 
             margin-bottom: 20px;
-            font-family: 'Playfair Display', serif; 
-            display: flex; 
+            font-family: 'Playfair Display', serif; /* Ensure consistent logo font */
+            display: flex; /* Align logo and text */
             align-items: center;
-            gap: 10px; 
+            gap: 10px; /* Space between logo and text */
         }
         .footer-logo img {
-            height: 40px; 
-            
+            height: 40px; /* Adjust as needed */
+            /* filter: invert(1); */ /* Apply if your logo is dark and needs to be white on dark background */
         }
         .footer-logo-text {
-            color: var(--white); 
+            color: var(--white); /* Ensure footer logo text is white */
         }
         .footer-links a { color: #888; text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
         .footer-links a:hover { color: var(--gold); }
 
-        
+        /* 11. SCROLL TO TOP */
         #scrollTop {
             position: fixed;
             bottom: 30px;
@@ -242,37 +250,42 @@
             .navbar-brand { position: relative; left: 0; transform: none; }
             .navbar-nav { background: var(--charcoal); padding: 20px; text-align: center; }
             .hero-title { font-size: 2.5rem; }
-            .navbar-brand img { height: 30px; } 
+            .navbar-brand img { height: 30px; } /* Smaller logo on mobile */
             .preloader-logo-container img { height: 60px; }
         }
-        
+        /* ============================= */
+/* ===== FINAL RESPONSIVE FIXES ===== */
+/* ============================= */
+
+/* Hero Section Mobile Fix */
 .hero-section {
     min-height: 100vh;
     height: auto;
     padding: 120px 20px;
 }
 
-
+/* About & Culinary Images Fully Responsive */
 .about-image {
     width: 100%;
     height: auto;
     max-height: 500px;
 }
 
-
+/* Mobile spacing for images */
 @media (max-width: 991px) {
     .about-image {
         margin-top: 30px;
     }
 }
 
-
+/* Stats Font Size Adjustment */
 @media (max-width: 576px) {
     .stat-number {
         font-size: 2rem;
     }
 }
 
+/* Footer Alignment Mobile Fix */
 @media (max-width: 768px) {
     footer .text-end {
         text-align: center !important;
@@ -294,31 +307,42 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Menu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
-                </ul>
-                <a class="navbar-brand" href="#">
-                    <img src="../images/logo.png" alt="Vinegar Logo" onerror="this.onerror=null;this.src='https:via.placeholder.com/40x40.png?text=LOGO'" />
-                    <span class="navbar-brand-text">VINEGAR</span>
-                </a>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Catering</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Recipe</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Awards</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- ===== VINEGAR PREMIUM NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg fixed-top vinegar-navbar">
+  <div class="container">
+
+    <!-- LOGO -->
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <!-- IMPORTANT: images folder same level as about.html -->
+      <img src="../images/logo.png" class="logo-img" alt="Vinegar Logo" style="height:55px;">
+      <span class="logo-text">VINEGAR</span>
+    </a>
+
+    <!-- MOBILE BUTTON -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#vinegarNav">
+      <span class="fa fa-bars text-white"></span>
+    </button>
+
+    <!-- MENU -->
+    <div class="collapse navbar-collapse" id="vinegarNav">
+      <ul class="navbar-nav mx-auto text-center">
+
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active-link" href="about.html">About us</a></li>
+        <li class="nav-item"><a class="nav-link" href="meals.html">Meals</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="catering.html">Catering</a></li>
+        <li class="nav-item"><a class="nav-link" href="recipe.html">Recipe</a></li>
+        <li class="nav-item"><a class="nav-link" href="awards.html">Awards</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact us</a></li>
+        <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
 
     <header class="hero-section">
         <div class="container">
@@ -469,7 +493,7 @@
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <h5 class="footer-logo">
-                        <img src="../images/logo.png" alt="Vinegar Logo" style="height: 40px;" onerror="this.onerror=null;this.src='https:via.placeholder.com/40x40.png?text=LOGO'" />
+                        <img src="../images/logo.png" alt="Vinegar Logo" style="height: 40px;" onerror="this.onerror=null;this.src='https://via.placeholder.com/40x40.png?text=LOGO'" />
                         <span class="footer-logo-text">VINEGAR FOOD</span>
                     </h5>
                     <p>The flagship brand of JADONS Ltd, delivering premium dining and corporate hospitality across the country for over three decades.</p>
@@ -525,6 +549,7 @@
                 return false;
             });
         });
+        
     </script>
 </body>
 </html>
