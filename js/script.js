@@ -54,3 +54,6 @@ function scrollManual(distance) {
         });
     }
 }
+
+
+
