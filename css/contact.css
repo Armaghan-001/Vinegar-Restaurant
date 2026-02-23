@@ -1,0 +1,97 @@
+/* CONTACT PAGE SPECIFIC STYLES */
+:root {
+    --maroon: #5e0b15;
+    --charcoal: #121212;
+    --gold: #c5a059;
+}
+
+.bg-charcoal { background-color: var(--charcoal); }
+
+/* Header */
+.contact-header {
+    height: 40vh;
+    background: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1920');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+}
+
+.header-overlay {
+    position: absolute; inset: 0;
+    background: rgba(18, 18, 18, 0.8);
+}
+
+.gold-text { color: var(--gold) !important; font-family: 'Playfair Display', serif; }
+
+/* Info Cards */
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(197, 160, 89, 0.1);
+    transition: 0.3s;
+}
+
+.contact-card:hover {
+    border-color: var(--maroon);
+    background: rgba(94, 11, 21, 0.1);
+}
+
+.contact-card i {
+    font-size: 24px;
+    color: var(--maroon);
+    background: var(--gold);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.contact-card h5 { color: var(--gold); margin-bottom: 5px; font-weight: 600; }
+.contact-card p { color: #ccc; margin-bottom: 0; }
+
+/* Form Styling */
+.form-container {
+    background: #1a1a1b;
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid var(--maroon);
+}
+
+.form-control {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+.form-control:focus {
+    background: transparent;
+    border-color: var(--gold);
+    color: white;
+    box-shadow: none;
+}
+
+.social-box a {
+    color: var(--gold);
+    font-size: 20px;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+
+.social-box a:hover { color: var(--maroon); }
+
+.map-container {
+    filter: grayscale(1) invert(1) contrast(1.2); /* Black & Gold Map Look */
+    margin-top: 50px;
+}
