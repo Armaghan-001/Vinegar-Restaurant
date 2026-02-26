@@ -20,79 +20,77 @@ body {
 
 
 /* --- NAVBAR SETUP --- */
-#mainNav {
-    background: transparent !important; /* Pani ki tarah saaf */
-    position: fixed; /* Page ke upar rahega */
-    top: 0;
-    width: 100%;
-    z-index: 1500;
-    padding: 20px 0;
-    transition: all 0.4s ease;
-    /* Bareek Golden Border sirf niche ki taraf */
-    border-bottom: 1px solid rgba(228, 197, 144, 0.3); 
-    backdrop-filter: blur(3px); /* Halki si depth ke liye */
+/* NAVBAR BASE STYLING */
+/* Navbar Variables */
+:root {
+    --primary-burgundy: #800020;
+    --camel-accent: #C19A6B;
+    --text-white: #ffffff;
 }
 
-#mainNav.nav-scrolled {
-    background: rgba(11, 11, 12, 0.8) !important; 
+/* Base Styling */
+.navbar {
     padding: 15px 0;
-    border-bottom: 1px solid rgba(228, 197, 144, 0.8);
-    backdrop-filter: blur(10px);
-}
-.logo { 
-    color: var(--white) !important; 
-    font-size: 30px; 
-    font-weight: 700; 
-    font-family: var(--font-royal); 
-    letter-spacing: 1.5px;
+    transition: all 0.4s ease;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(193, 154, 107, 0.1);
+    z-index: 1000;
 }
 
-.logo span {
-    color: var(--gold-crayola);
+/* Scroll Effect Class (JS se control hoga) */
+/* Logo size ko control karne ke liye */
+.navbar-brand img {
+    height: 50px; /* Aap isko 40px ya 60px bhi kar sakte hain apni pasand ke mutabiq */
+    width: auto;  /* Width automatically adjust ho jayegi */
+    object-fit: contain;
+    transition: all 0.4s ease;
 }
 
-.navbar-nav {
+/* Jab page scroll ho to logo thoda aur chota ho jaye (Optional premium effect) */
+.navbar.scrolled .navbar-brand img {
+    height: 40px;
+}
+.brand-text {
+    color: var(--camel-accent) !important;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.nav-link {
+    color: var(--text-white) !important;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 8px;
     position: relative;
-    display: flex; 
+    transition: color 0.3s;
 }
 
-.nav-dot {
+/* Hover & Active State */
+.active-link, .nav-link:hover {
+    color: var(--camel-accent) !important;
+}
+
+/* Underline Animation */
+.nav-link::after {
+    content: '';
     position: absolute;
+    width: 0;
+    height: 2px;
     bottom: -5px;
     left: 0;
-    width: 8px;
-    height: 8px;
-    background-color: var(--gold-crayola);
-    border-radius: 50%;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    pointer-events: none;
-    opacity: 0;
+    background-color: var(--camel-accent);
+    transition: width 0.3s ease;
 }
 
-.navbar-nav:hover .nav-dot, .nav-dot.active {
-    opacity: 1;
+.nav-link:hover::after, .active-link::after {
+    width: 100%;
 }
 
-/* --- DROPDOWN --- */
-.dropdown-menu {
-    background-color: var(--eerie-black) !important;
-    border: 1px solid var(--gold-crayola) !important;
-    border-radius: 10px;
-    padding: 10px 0;
+.navbar-toggler {
+    border: 1px solid var(--camel-accent);
 }
-
-.dropdown-item {
-    color: var(--white) !important;
-    font-family: var(--font-body);
-    transition: 0.3s ease;
-}
-
-.dropdown-item:hover {
-    background-color: var(--gold-crayola) !important;
-    color: var(--smoky-black-1) !important;
-    padding-left: 20px;
-}
-
 /* --- HERO SECTION --- */
 /* --- GRILLI STYLE HERO WITH ZOOM-IN SLIDER --- */
 /* --- FULL CENTERED HERO STYLE --- */

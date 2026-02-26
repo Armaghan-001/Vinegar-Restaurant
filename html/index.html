@@ -10,33 +10,34 @@
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand logo" href="#">Vinegar Food</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto text-uppercase">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Meals</a>
-                        <ul class="dropdown-menu border-0 shadow">
-                            <li><a class="dropdown-item" href="#">Regular</a></li>
-                            <li><a class="dropdown-item" href="#">Lunch</a></li>
-                            <li><a class="dropdown-item" href="#">Snacks</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Awards</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
-                    <div class="nav-dot"></div>
-                </ul>
-            </div>
-        </div>
-    </nav>
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="index.html" style="display: flex; align-items: center; gap: 10px;">
+            <img src="../images/logo.png" alt="Vinegar Food Logo" 
+                 style="height: 45px; width: auto; object-fit: contain;"
+                 onerror="this.src='https://via.placeholder.com/50x50?text=V'">
+            <span class="brand-text">VINEGAR</span>
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="fa fa-bars text-white"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link active-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
+                <li class="nav-item"><a class="nav-link" href="meals.html">Meals</a></li>
+                <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" href="catering.html">Catering</a></li>
+                <li class="nav-item"><a class="nav-link" href="recipe.html">Recipe</a></li>
+                <li class="nav-item"><a class="nav-link" href="awards.html">Awards</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact us</a></li>
+                <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
   <section class="hero d-flex align-items-center justify-content-center" id="heroSection">
     <div class="hero-slider">
         <div class="slide" style="background-image: url('/image/hero-slider-1.jpg');"></div>

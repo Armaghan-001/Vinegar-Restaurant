@@ -6,7 +6,104 @@
 }
 
 .bg-charcoal { background-color: var(--charcoal); }
+/* NAVBAR BASE STYLING */
+.navbar {
+    padding: 15px 0;
+    transition: all 0.4s ease;
+    background: rgba(0, 0, 0, 0.3); /* Initial light dark background */
+    border-bottom: 1px solid rgba(193, 154, 107, 0.1);
+    z-index: 1050;
+}
 
+/* Scroll hone ke baad ka look */
+.navbar.scrolled {
+    background: rgba(18, 18, 18, 0.98) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--primary-burgundy);
+    padding: 10px 0;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+/* Brand Logo & Text */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-brand img {
+    max-height: 50px;
+    width: auto;
+}
+
+.brand-text {
+    color: var(--camel-accent) !important;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Playfair Display', serif;
+}
+
+/* Nav Links Styling */
+.nav-link {
+    color: var(--text-white) !important;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 8px;
+    position: relative;
+    transition: color 0.3s ease;
+    font-weight: 400;
+}
+
+/* Active & Hover State */
+.active-link, 
+.nav-link:hover {
+    color: var(--camel-accent) !important;
+}
+
+/* Underline Animation */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--camel-accent);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.active-link::after {
+    width: 100%;
+}
+
+/* Mobile Toggler Icon */
+.navbar-toggler {
+    border: 1px solid var(--camel-accent);
+    padding: 5px 8px;
+}
+
+.navbar-toggler .fa-bars {
+    color: var(--camel-accent) !important;
+    font-size: 1.2rem;
+}
+
+/* Responsive Fix for Mobile Menu */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: var(--dark-bg);
+        margin-top: 15px;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid var(--camel-accent);
+    }
+    .nav-link {
+        margin: 10px 0;
+        text-align: center;
+    }
+}
 /* Header */
 .contact-header {
     height: 40vh;
