@@ -3,503 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu | Vinegar Food Restaurant - Flagship of JADONS Ltd</title>
-    
+    <title>Vinegar Food Restaurant</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --maroon: #5e0b15;
-            --black: #111111;
-            --gold: #c5a059;
-            --white: #ffffff;
-            --light-gray: #f4f4f4;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--white);
-            scroll-behavior: smooth;
-        }
-
-        /* 1. PRELOADER */
-        #preloader {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--black);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
-        .preloader-logo {
-            color: var(--gold);
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            letter-spacing: 5px;
-            margin-bottom: 15px;
-        }
-        .loading-line {
-            width: 200px;
-            height: 2px;
-            background: rgba(197, 160, 89, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        .loading-line::after {
-            content: '';
-            position: absolute;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--gold);
-            animation: slide 1.5s infinite;
-        }
-        @keyframes slide { 100% { left: 100%; } }
-
-        /* 2. NAVBAR */
-        .navbar { background: var(--white); border-bottom: 1px solid #eee; }
-        .nav-link {
-            color: var(--black) !important;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            padding: 10px 15px !important;
-        }
-        .nav-link:hover { color: var(--maroon) !important; }
-
-        /* 3. LOCATION SELECTION */
-        #location-screen {
-            height: 100vh;
-            background: var(--light-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: fixed;
-            width: 100%;
-            z-index: 999;
-        }
-        .loc-card {
-            background: white;
-            padding: 50px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-        }
-
-        /* 5. GINSOY STYLE STICKY BAR */
-        .sticky-category-bar {
-            position: sticky;
-            top: 0;
-            z-index: 900;
-            background: var(--black);
-            padding: 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .cat-scroll {
-            display: flex;
-            overflow-x: auto;
-            scrollbar-width: none; /* Firefox */
-        }
-        .cat-scroll::-webkit-scrollbar { display: none; }
-        .cat-link {
-            padding: 15px 25px;
-            color: #ccc;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            font-weight: 500;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
-            border-bottom: 3px solid transparent;
-        }
-        .cat-link i { color: var(--gold); font-size: 1.1rem; }
-        .cat-link:hover, .cat-link.active {
-            color: var(--white);
-            border-bottom: 3px solid var(--maroon);
-            background: rgba(255,255,255,0.05);
-        }
-
-        /* 6. DISH CARDS */
-        .category-header {
-            background-color: var(--maroon);
-            color: var(--gold);
-            padding: 60px 0;
-            text-align: center;
-            margin-bottom: 40px;
-            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070');
-            background-size: cover;
-            background-attachment: fixed;
-        }
-        .category-header h2 { font-family: 'Playfair Display'; font-size: 2.5rem; }
-
-        .dish-card {
-            background: #fff;
-            border: 1px solid #eee;
-            margin-bottom: 25px;
-            transition: 0.3s;
-            border-radius: 0;
-            overflow: hidden;
-        }
-        .dish-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        
-        .dish-img-container {
-            height: 200px;
-            background-color: #f9f9f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .dish-img-container img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .dish-content { padding: 20px; text-align: center; }
-        .dish-title { font-weight: 600; font-size: 1rem; margin-bottom: 8px; color: var(--black); height: 2.4rem; overflow: hidden; }
-        .dish-price { color: var(--maroon); font-weight: 700; font-size: 1.1rem; margin-bottom: 15px; }
-        
-        .btn-add {
-            background: var(--black);
-            color: var(--gold);
-            border: none;
-            padding: 8px 25px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            width: 100%;
-            transition: 0.3s;
-        }
-        .btn-add:hover { background: var(--maroon); color: white; }
-
-        /* SCROLL TO TOP */
-        #btn-back-to-top {
-            position: fixed;
-            bottom: 20px; right: 20px;
-            display: none;
-            background: var(--maroon);
-            color: white;
-            border-radius: 50%;
-            width: 45px; height: 45px;
-            border: none;
-            z-index: 1000;
-        }
-
-        footer { background: var(--black); color: #888; padding: 60px 0; }
-        footer h5 { color: var(--gold); font-family: 'Playfair Display'; }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/meals.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div id="preloader">
-        <div class="preloader-logo">VINEGAR</div>
-        <div class="loading-line"></div>
+<div id="loader">
+    <div class="loader-wrapper">
+        <img src="../images/logo.png" class="loader-logo">
+        <div class="spinner-line"></div>
+    </div>
+</div>
+
+<div class="header-top" id="headerTop">
+    <div class="scroller-wrapper">
+        <button class="scroll-btn left-btn" onclick="scrollManual(-300)">&#10094;</button>
+        
+        <div class="top-scroller" id="topScroller">
+            <div class="scroll-track">
+                <div class="scroll-item" data-category="meals" data-dish="Chicken Biryani" onclick="scrollToSection('meals')"><img src="../images/chicken-biryani.jpg"><span>Chicken Biryani</span></div>
+                <div class="scroll-item" data-category="meals" data-dish="Beef Biryani" onclick="scrollToSection('meals')"><img src="../images/beef-biryani.jpg"><span>Beef Biryani</span></div>
+                <div class="scroll-item" data-category="meals" data-dish="Mutton Biryani" onclick="scrollToSection('meals')"><img src="../images/mutton-biryani.jpg"><span>Mutton Biryani</span></div>
+                <div class="scroll-item" data-category="meals" data-dish="Chicken Karahi" onclick="scrollToSection('meals')"><img src="../images/Chicken-Karahi.jpg"><span>Chicken Karahi</span></div>
+                <div class="scroll-item" data-category="meals" data-dish="Butter Chicken" onclick="scrollToSection('meals')"><img src="../images/butter-chicken.jpg"><span>Butter Chicken</span></div>
+                <div class="scroll-item" data-category="meals" data-dish="BBQ Platter" onclick="scrollToSection('meals')"><img src="../images/bbq-platter.jpg"><span>BBQ Platter</span></div>
+                <div class="scroll-item" data-category="regular" data-dish="Daal Chawal" onclick="scrollToSection('regular')"><img src="../images/daal-chawal.jpg"><span>Daal Chawal</span></div>
+                <div class="scroll-item" data-category="regular" data-dish="Mixed Sabzi" onclick="scrollToSection('regular')"><img src="../images/mixed-sabzi.jpg"><span>Mixed Sabzi</span></div>
+                <div class="scroll-item" data-category="regular" data-dish="Aloo Palak" onclick="scrollToSection('regular')"><img src="../images/aloo-palak.jpg"><span>Aloo Palak</span></div>
+                <div class="scroll-item" data-category="snacks" data-dish="Samosa Chaat" onclick="scrollToSection('snacks')"><img src="../images/samosa-chaat.jpg"><span>Samosa Chaat</span></div>
+                <div class="scroll-item" data-category="snacks" data-dish="Chicken Wings" onclick="scrollToSection('snacks')"><img src="../images/chicken-wings.jpg"><span>Chicken Wings</span></div>
+                <div class="scroll-item" data-category="snacks" data-dish="Fries" onclick="scrollToSection('snacks')"><img src="../images/fries.jpg"><span>Fries</span></div>
+                <div class="scroll-item" data-category="lunch" data-dish="Biryani Combo" onclick="scrollToSection('lunch')"><img src="../images/biryani-combo.jpg"><span>Biryani Combo</span></div>
+                <div class="scroll-item" data-category="lunch" data-dish="Karahi Combo" onclick="scrollToSection('lunch')"><img src="../images/karahi-combo.jpg"><span>Karahi Combo</span></div>
+                <div class="scroll-item" data-category="lunch" data-dish="Zinger Combo" onclick="scrollToSection('lunch')"><img src="../images/zinger-combo.jpg"><span>Zinger Combo</span></div>
+                <div class="scroll-item" data-category="dessert" data-dish="Gulab Jamun" onclick="scrollToSection('dessert')"><img src="../images/gulab-jamun.jpg"><span>Gulab Jamun</span></div>
+                <div class="scroll-item" data-category="dessert" data-dish="Kheer" onclick="scrollToSection('dessert')"><img src="../images/kheer.jpg"><span>Kheer</span></div>
+                <div class="scroll-item" data-category="dessert" data-dish="Ice Cream" onclick="scrollToSection('dessert')"><img src="../images/ice-cream.jpg"><span>Ice Cream</span></div>
+                <div class="scroll-item" data-category="beverages" data-dish="Lassi" onclick="scrollToSection('beverages')"><img src="../images/lassi.jpg"><span>Lassi</span></div>
+                <div class="scroll-item" data-category="beverages" data-dish="Milkshake" onclick="scrollToSection('beverages')"><img src="../images/milkshake.jpg"><span>Milkshake</span></div>
+                <div class="scroll-item" data-category="beverages" data-dish="Coffee" onclick="scrollToSection('beverages')"><img src="../images/coffee.jpg"><span>Coffee</span></div>
+                <div class="scroll-item" data-category="meals" data-dish="Chicken Biryani" onclick="scrollToSection('meals')"><img src="../images/chicken-biryani.jpg"><span>Chicken Biryani</span></div>
+                <div class="scroll-item" data-category="meals" data-dish="Beef Biryani" onclick="scrollToSection('meals')"><img src="../images/beef-biryani.jpg"><span>Beef Biryani</span></div>
+                <div class="scroll-item" data-category="meals" data-dish="Chicken Karahi" onclick="scrollToSection('meals')"><img src="../images/Chicken-Karahi.jpg"><span>Chicken Karahi</span></div>
+                <div class="scroll-item" data-category="regular" data-dish="Daal Chawal" onclick="scrollToSection('regular')"><img src="../images/daal-chawal.jpg"><span>Daal Chawal</span></div>
+                <div class="scroll-item" data-category="snacks" data-dish="Samosa Chaat" onclick="scrollToSection('snacks')"><img src="../images/samosa-chaat.jpg"><span>Samosa Chaat</span></div>
+                <div class="scroll-item" data-category="dessert" data-dish="Vinegar Special Tea" onclick="scrollToSection('dessert')"><img src="../images/tea.jpg"><span>Vinegar Special Tea</span></div>
+                <div class="scroll-item" data-category="beverages" data-dish="Lassi" onclick="scrollToSection('beverages')"><img src="../images/lassi.jpg"><span>Lassi</span></div>
+            </div>
+        </div>
+
+        <button class="scroll-btn right-btn" onclick="scrollManual(300)">&#10095;</button>
+    </div>
+</div>
+
+<nav class="main-header d-flex align-items-center justify-content-between px-4">
+    <div class="header-left">
+        <img src="../images/logo.png" alt="Vinegar Logo" class="brand-logo">
+    </div>
+    
+    <div class="header-center d-none d-lg-flex" id="mainNavLinks">
+        <a href="#">Home</a>
+        <a href="#">Gallery</a>
+        <a href="#">Recipe</a>
+        <a href="#">Catering</a>
+        <a href="#">About</a>
+        <a href="#">Awards</a>
+        <a href="#">Feedback</a>
+        <a href="#">Contact</a>
     </div>
 
-    <div id="location-screen">
-        <div class="loc-card">
-            <h2 class="mb-4" style="font-family: 'Playfair Display';">Welcome to Vinegar</h2>
-            <div class="mb-3 text-start">
-                <label class="small fw-bold">ORDER TYPE</label>
-                <select class="form-select rounded-0" id="orderType">
-                    <option>Delivery</option>
-                    <option>Pickup</option>
-                </select>
+    <div class="header-right d-flex align-items-center gap-2">
+        <div id="loadingStatusIcon" class="loading-status-icon" onclick="toggleLoadingPanel()">
+            <i class="fas fa-hourglass-half"></i>
+        </div>
+        <div class="nav-info-box" onclick="openLocationModal()">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="text-group"><span>Branch</span><small id="currentLoc">Karachi</small></div>
+        </div>
+        <div class="cart-icon-wrapper" onclick="toggleCart()">
+            <i class="fas fa-shopping-basket"></i>
+            <span class="cart-count" id="cartCount">0</span>
+            <span class="order-status-badge" id="orderStatusBadge" style="display: none;"><i class="fas fa-clock"></i></span>
+        </div>
+    </div>
+</nav>
+
+<div id="loadingStatusPanel" class="loading-status-panel">
+    <div class="panel-header">
+        <h6>Order Status</h6>
+        <button class="close-panel" onclick="closeLoadingPanel()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="panel-content">
+        <div class="status-message" id="loadingStatusMessage">No active orders</div>
+        <div class="timer-container" id="loadingTimerContainer" style="display: none;">
+            <div class="timer-label">Time remaining:</div>
+            <div class="timer-value" id="loadingTimer">00:00</div>
+        </div>
+    </div>
+</div>
+
+<div id="orderStatusIndicator" class="order-status-indicator" style="display: none;">
+    <div class="status-content">
+        <i class="fas fa-check-circle text-success"></i>
+        <span>Your order has been confirmed and is on the way. Thank you for your order.</span>
+        <div class="status-timer">
+            <i class="fas fa-clock"></i>
+            <span id="statusTimer">30:00</span>
+        </div>
+    </div>
+</div>
+
+<div id="heroSlider" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="../images/carousel-banner-1.jpg" class="d-block w-100" style="height: 400px; object-fit: cover;">
+            <div class="carousel-caption">
+                <h1>Welcome to Vinegar</h1>
+                <p>The Finest Desi Fusion in Karachi</p>
             </div>
-            <div class="mb-4 text-start">
-                <label class="small fw-bold">SELECT LOCATION (KARACHI)</label>
-                <select class="form-select rounded-0" id="locationSelect">
-                    <option>Clifton</option>
-                    <option>DHA Phase 2</option>
-                    <option>DHA Phase 5</option>
-                    <option>DHA Phase 8</option>
-                    <option>Gulshan-e-Iqbal</option>
-                    <option>Gulistan-e-Johar</option>
-                    <option>North Nazimabad</option>
-                    <option>PECHS</option>
-                    <option>Saddar</option>
-                </select>
+        </div>
+        <div class="carousel-item">
+            <img src="../images/carousel-banner-2.jpg" class="d-block w-100" style="height: 400px; object-fit: cover;">
+            <div class="carousel-caption">
+                <h1>Authentic Biryani</h1>
+                <p>Taste the Heritage of Flavors</p>
             </div>
-            <button class="btn btn-dark w-100 py-3 rounded-0" id="startOrdering" style="background: var(--maroon); border:none;">START ORDERING</button>
+        </div>
+    </div>
+</div>
+
+<div class="cat-nav">
+    <div class="cat-scroll">
+        <a href="#meals" class="cat-item active" data-target="meals"><img src="../images/icon1.jpg"><span>Meals</span></a>
+        <a href="#regular" class="cat-item" data-target="regular"><img src="../images/icon2.jpg"><span>Regular</span></a>
+        <a href="#lunch" class="cat-item" data-target="lunch"><img src="../images/icon3.jpg"><span>Lunch</span></a>
+        <a href="#snacks" class="cat-item" data-target="snacks"><img src="../images/icon4.jpg"><span>Snacks</span></a>
+        <a href="#dessert" class="cat-item" data-target="dessert"><img src="../images/icon5.jpg"><span>Dessert</span></a>
+        <a href="#beverages" class="cat-item" data-target="beverages"><img src="../images/icon6.jpg"><span>Beverages</span></a>
+    </div>
+</div>
+
+<main class="container py-4">
+    <div class="search-main mb-4">
+        <div class="search-box">
+            <input type="text" id="menuSearch" placeholder="Search for flavors..." oninput="searchDish()">
+            <i class="fas fa-search"></i>
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand d-lg-none" href="#" style="color:var(--maroon); font-weight:bold;">VINEGAR</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav mx-auto align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#">Menu</a></li>
-                    <li class="nav-item mx-4 d-none d-lg-block">
-                        <span style="font-family: 'Playfair Display'; font-size: 1.8rem; color: var(--maroon); letter-spacing: 2px;">VINEGAR</span>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Catering</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Awards</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+    <div id="menu-container">
+        
+    </div>
+    <div id="noResult" style="display: none; text-align: center; padding: 40px; color: #888; font-weight: bold;">
+        <i class="fas fa-search fa-2x mb-3"></i>
+        <p>No dishes found matching your search!</p>
+    </div>
+</main>
+
+<div id="dishModal" class="custom-modal" style="display: none;">
+    <div class="modal-box">
+        <button class="btn-close-modal" onclick="closeDishModal()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div id="dishModalContent">
+            
+        </div>
+    </div>
+</div>
+
+<div id="locationModal" class="custom-modal">
+    <div class="modal-box">
+        <img src="../images/logo.png" width="80" class="mb-3">
+        <h5>Select Your Location</h5>
+        <p class="small text-muted">We serve all over Karachi</p>
+        <div class="type-toggle">
+            <button id="btnDel" onclick="toggleType('delivery')" class="active">Delivery</button>
+            <button id="btnPick" onclick="toggleType('pickup')">Pickup</button>
+        </div>
+        <select id="areaSelect" class="form-control mb-3" required>
+            <option value="">Select Area...</option>
+        </select>
+        <div id="locationError" class="text-danger small mb-2" style="display: none;">Please select an area</div>
+        <button class="btn-confirm-select" onclick="confirmLocation()">Confirm Location</button>
+    </div>
+</div>
+
+<div id="cartModal" class="custom-modal" style="display: none;">
+    <div class="modal-box cart-modal-box">
+        <button class="btn-close-modal" onclick="toggleCart()">
+            <i class="fas fa-times"></i>
+        </button>
+        <h5 class="text-start mb-4">Your Cart</h5>
+        <div id="cartItemsList" class="cart-items-list" style="max-height: 300px; overflow-y: auto;">
+        </div>
+        <hr>
+        <div id="cartSummary" class="cart-summary">
+            <div class="d-flex justify-content-between mb-2">
+                <span>Subtotal</span>
+                <span id="subtotalAmount">Rs. 0</span>
+            </div>
+        </div>
+        <div class="fw-bold mb-3 text-end" id="orderTotal">Total: Rs. 0</div>
+        <button class="btn-confirm-select w-100" onclick="proceedToCheckout()">Proceed to Checkout</button>
+        <button class="btn btn-sm text-danger mt-2" onclick="toggleCart()">Close</button>
+    </div>
+</div>
+
+<div id="checkoutModal" class="custom-modal" style="display: none;">
+    <div class="modal-box checkout-modal-box">
+        <button class="btn-close-modal" onclick="closeCheckoutModal()">
+            <i class="fas fa-times"></i>
+        </button>
+        <h5 class="text-start mb-4">Checkout Details</h5>
+        
+        <div class="checkout-form">
+            <div class="row g-3">
+                <div class="col-12">
+                    <select class="form-control" id="titleSelect" required>
+                        <option value="">Select Title</option>
+                        <option value="Mr">Mr</option>
+                        <option value="Mrs">Mrs</option>
+                        <option value="Ms">Ms</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
+                </div>
+                <div class="col-12">
+                    <input type="tel" class="form-control" id="mobileNumber" placeholder="Mobile Number" required>
+                </div>
+                <div class="col-12">
+                    <input type="text" class="form-control" id="deliveryAddress" placeholder="Delivery Address" required>
+                </div>
+                <div class="col-12">
+                    <select class="form-control" id="paymentMethod" required>
+                        <option value="">Select Payment Method</option>
+                        <option value="cod">Cash on Delivery</option>
+                        <option value="online">Online Payment</option>
+                    </select>
+                </div>
+            </div>
+            <div id="checkoutError" class="text-danger small mt-2" style="display: none;">Please fill all required fields</div>
+        </div>
+        
+        <div class="mt-4">
+            <button class="btn-confirm-select w-100" onclick="validateAndPlaceOrder()">Place Order</button>
+        </div>
+    </div>
+</div>
+
+<div id="orderConfirmModal" class="custom-modal" style="display: none;">
+    <div class="modal-box">
+        <div class="order-success text-center">
+            <i class="fas fa-check-circle" style="font-size: 60px; color: #28a745;"></i>
+            <h2 class="mt-3">Your Order Is Confirmed!</h2>
+            <p>Your delicious food will be delivered in</p>
+            <div class="timer-display" id="countdownTimer" style="font-size: 48px; font-weight: bold; color: var(--main-red);">30:00</div>
+            <p class="mt-2">minutes</p>
+            <button class="btn-confirm-select mt-3" onclick="closeOrderConfirm()">Continue Shopping</button>
+        </div>
+    </div>
+</div>
+
+<div id="scrollTop" class="scroll-top-btn">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+<div id="floatSearch" onclick="scrollToSearch()"><i class="fas fa-search"></i></div>
+
+<footer class="main-footer pt-5 pb-3">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h2 class="footer-logo mb-4">VINEGAR<span>FOOD</span></h2>
+                <p class="footer-text">Where every flavor tells a story. From our first kitchen to 1000+ global destinations, we redefine the art of dining with passion and heritage.</p>
+                <div class="social-links mt-4">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-6 mb-4 ms-lg-auto">
+                <h5 class="footer-heading">Explore</h5>
+                <ul class="footer-links">
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Reservations</a></li>
+                    <li><a href="#">Our Branches</a></li>
+                    <li><a href="#">Careers</a></li>
                 </ul>
             </div>
-        </div>
-    </nav>
 
-    <div id="main-content" style="display:none;">
-        
-        <div class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active" style="height: 400px; background: url('https://images.unsplash.com/photo-1550966841-396ad88601e8?q=80&w=2070') center/cover;">
-                    <div style="background:rgba(0,0,0,0.5); width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
-                        <h1 class="text-white display-3" style="font-family: 'Playfair Display';">Explore Our Curated Menu</h1>
-                    </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="footer-heading">Visit Us</h5>
+                <p class="footer-contact"><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Food District, Karachi</p>
+                <p class="footer-contact"><i class="fas fa-phone"></i> +92 300 1234567</p>
+                <p class="footer-contact"><i class="fas fa-envelope"></i> info@vinegarfood.com</p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="footer-heading">Newsletter</h5>
+                <p class="footer-text">Get exclusive offers & recipes.</p>
+                <div class="newsletter-box mt-3">
+                    <input type="email" placeholder="Your Email">
+                    <button><i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
         </div>
 
-        <div class="bg-light py-3 border-bottom sticky-top" style="top: 0; z-index: 1000;">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-8">
-                        <div class="input-group">
-                            <span class="input-group-text bg-white border-end-0 rounded-0"><i class="fa fa-search text-muted"></i></span>
-                            <input type="text" id="menuSearch" class="form-control border-start-0 rounded-0" placeholder="Search for dishes (e.g. Rice, Beef, Soup...)">
-                        </div>
-                    </div>
-                    <div class="col-md-4 text-end">
-                        <div class="dropdown d-inline-block">
-                            <button class="btn btn-white border rounded-0 px-4 py-2" data-bs-toggle="dropdown">
-                                <i class="fa fa-shopping-bag me-2 text-maroon" style="color:var(--maroon)"></i> 
-                                <span class="fw-bold">Rs. <span id="cartTotal">0</span></span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end p-3 shadow-lg" style="width:300px; border-radius:0;">
-                                <h6 class="border-bottom pb-2">My Basket</h6>
-                                <div id="cartItems" class="text-muted small py-3 text-center">Your basket is empty</div>
-                                <button class="btn btn-dark w-100 rounded-0 py-2 mt-2" style="background:var(--maroon); border:none;">CHECKOUT</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <hr class="footer-divider">
+
+        <div class="footer-bottom d-md-flex justify-content-between align-items-center">
+            <p class="mb-0">&copy; 2024 Vinegar Food. Crafted for Excellence.</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#" class="ms-3">Terms of Service</a>
             </div>
         </div>
-
-        <div class="sticky-category-bar">
-            <div class="container">
-                <div class="cat-scroll">
-                    <a href="#meals" class="cat-link active"><i class="fa fa-utensils"></i> Meals</a>
-                    <a href="#regular" class="cat-link"><i class="fa fa-bowl-rice"></i> Regular</a>
-                    <a href="#lunch" class="cat-link"><i class="fa fa-sun"></i> Lunch</a>
-                    <a href="#snacks" class="cat-link"><i class="fa fa-hamburger"></i> Snacks</a>
-                    <a href="#dessert" class="cat-link"><i class="fa fa-birthday-cake"></i> Dessert</a>
-                    <a href="#beverages" class="cat-link"><i class="fa fa-cocktail"></i> Beverages</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="menu-sections">
-            
-            <section id="meals">
-                <div class="category-header">
-                    <h2>Meals</h2>
-                </div>
-                <div class="container mb-5">
-                    <div class="row" id="mealsGrid">
-                        <script>
-                            for(let i=1; i<=6; i++){
-                                document.write(`
-                                <div class="col-6 col-md-4 col-lg-3 dish-item">
-                                    <div class="dish-card">
-                                        <div class="dish-img-container">
-                                            <img src="https://via.placeholder.com/400x300?text=Vinegar+Dish+${i}" alt="Dish">
-                                        </div>
-                                        <div class="dish-content">
-                                            <div class="dish-title">[Dish Name Placeholder ${i}]</div>
-                                            <div class="dish-price">Rs. [Price]</div>
-                                            <button class="btn-add">ADD TO CART</button>
-                                        </div>
-                                    </div>
-                                </div>`);
-                            }
-                        </script>
-                    </div>
-                </div>
-            </section>
-
-            <section id="regular">
-                <div class="category-header">
-                    <h2>Regular Items</h2>
-                </div>
-                <div class="container mb-5">
-                    <div class="row">
-                        <script>
-                            for(let i=1; i<=8; i++){
-                                document.write(`
-                                <div class="col-6 col-md-4 col-lg-3 dish-item">
-                                    <div class="dish-card">
-                                        <div class="dish-img-container"><img src="https://via.placeholder.com/400x300?text=Regular+Item+${i}" alt="Dish"></div>
-                                        <div class="dish-content">
-                                            <div class="dish-title">[Regular Dish Name ${i}]</div>
-                                            <div class="dish-price">Rs. [Price]</div>
-                                            <button class="btn-add">ADD TO CART</button>
-                                        </div>
-                                    </div>
-                                </div>`);
-                            }
-                        </script>
-                    </div>
-                </div>
-            </section>
-
-            <section id="lunch">
-                <div class="category-header">
-                    <h2>Lunch Special</h2>
-                </div>
-                <div class="container mb-5">
-                    <div class="row">
-                        <script>
-                            for(let i=1; i<=4; i++){
-                                document.write(`
-                                <div class="col-6 col-md-4 col-lg-3 dish-item">
-                                    <div class="dish-card">
-                                        <div class="dish-img-container"><img src="https://via.placeholder.com/400x300?text=Lunch+Dish+${i}" alt="Dish"></div>
-                                        <div class="dish-content">
-                                            <div class="dish-title">[Lunch Deal Placeholder ${i}]</div>
-                                            <div class="dish-price">Rs. [Price]</div>
-                                            <button class="btn-add">ADD TO CART</button>
-                                        </div>
-                                    </div>
-                                </div>`);
-                            }
-                        </script>
-                    </div>
-                </div>
-            </section>
-
-            <section id="snacks"><div class="category-header"><h2>Snacks</h2></div><div class="container py-4 text-center text-muted">Section loaded with placeholders.</div></section>
-            <section id="dessert"><div class="category-header"><h2>Desserts</h2></div><div class="container py-4 text-center text-muted">Section loaded with placeholders.</div></section>
-            <section id="beverages"><div class="category-header"><h2>Beverages</h2></div><div class="container py-4 text-center text-muted">Section loaded with placeholders.</div></section>
-        </div>
-
-        <section class="py-5" style="background: #fdfdfd; border-top: 1px solid #eee;">
-            <div class="container text-center">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3170/3170733.png" width="60" class="mb-3" alt="Quality">
-                        <h3 style="color:var(--maroon); font-family: 'Playfair Display';">Elite Culinary Standards</h3>
-                        <p class="text-muted">Vinegar Food Restaurant (JADONS Ltd) maintains a 5-star standard by utilizing premium organic ingredients, professional sous-vide techniques, and a rigorous international hygiene protocol. Our menu is designed for the discerning palate.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 mb-4">
-                        <h5 class="mb-3">VINEGAR FOOD</h5>
-                        <p class="small">The premier fine-dining flagship of JADONS Ltd. We bring world-class flavors to the heart of Karachi with elegance and sophistication.</p>
-                    </div>
-                    <div class="col-md-2 mb-4">
-                        <h5 class="mb-3">Explore</h5>
-                        <ul class="list-unstyled small">
-                            <li><a href="#" class="text-white-50 text-decoration-none">Home</a></li>
-                            <li><a href="#" class="text-white-50 text-decoration-none">Menu</a></li>
-                            <li><a href="#" class="text-white-50 text-decoration-none">Catering</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3 mb-4">
-                        <h5 class="mb-3">Contact</h5>
-                        <p class="small mb-1">DHA Phase 8, Karachi, Pakistan</p>
-                        <p class="small">info@vinegarfood.com</p>
-                    </div>
-                    <div class="col-md-3">
-                        <h5 class="mb-3">Follow Us</h5>
-                        <div class="d-flex gap-3">
-                            <a href="#" class="text-white-50"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="text-white-50"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="text-white-50"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <hr style="border-color: #333;">
-                <div class="text-center small text-white-50">
-                    &copy; 2026 Vinegar Food Restaurant | Academic Project by JADONS Ltd.
-                </div>
-            </div>
-        </footer>
     </div>
+</footer>
 
-    <button id="btn-back-to-top" title="Go to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
 
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            // 1. Preloader
-            setTimeout(function() {
-                $('#preloader').fadeOut(500);
-            }, 1200);
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/meals.js"></script>
 
-            // 3. Location selection logic
-            $('#startOrdering').on('click', function() {
-                $('#location-screen').fadeOut(600);
-                $('#main-content').fadeIn(800);
-            });
-
-            // 8. Live Search
-            $("#menuSearch").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $(".dish-item").filter(function() {
-                    $(this).toggle($(this).find('.dish-title').text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-
-            // 5. Sticky Category Scroll Sync
-            $(window).scroll(function() {
-                var scrollPos = $(document).scrollTop();
-                $('.cat-link').each(function () {
-                    var currLink = $(this);
-                    var refElement = $(currLink.attr("href"));
-                    if (refElement.position().top <= scrollPos + 160 && refElement.position().top + refElement.height() > scrollPos + 160) {
-                        $('.cat-link').removeClass("active");
-                        currLink.addClass("active");
-                    }
-                });
-
-                // Scroll to top button
-                if ($(window).scrollTop() > 300) {
-                    $('#btn-back-to-top').fadeIn();
-                } else {
-                    $('#btn-back-to-top').fadeOut();
-                }
-            });
-
-            // Back to top click
-            $('#btn-back-to-top').click(function() {
-                $('html, body').animate({scrollTop:0}, '300');
-            });
-
-            // Cart logic dummy
-            let total = 0;
-            $('.btn-add').click(function() {
-                total += 1550;
-                $('#cartTotal').text(total.toLocaleString());
-                $('#cartItems').text("Items added to basket");
-                $(this).text("ADDED").addClass("btn-success");
-                setTimeout(() => { $(this).text("ADD TO CART").removeClass("btn-success"); }, 1000);
-            });
-        });
-    </script>
 </body>
 </html>
