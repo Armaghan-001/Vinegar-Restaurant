@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinegar Food · Awards & Excellence</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Montserrat', sans-serif; background: #fcf9f5; color: #1e1e1e; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: 0.02em; }
+    :root { --burgundy: #800020; --gold: #c19a6b; --cream: #faf3e8; --white: #ffffff; --dark-bg: #1a0f0c; }
+
+    #preloader {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: #0d0604; z-index: 9999; display: flex;
+      align-items: center; justify-content: center; transition: opacity 0.8s ease;
+    }
+    .preloader-content {
+      text-align: center; animation: pulseScale 1.8s infinite ease-in-out;
+    }
+    .preloader-content img {
+      width: 140px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(193,154,107,0.3));
+    }
+    .preloader-content .gold-spinner {
+      width: 50px; height: 50px; margin: 0 auto; border: 3px solid rgba(193,154,107,0.2);
+      border-top: 3px solid var(--gold); border-radius: 50%; animation: spin 1s infinite linear;
+    }
+    @keyframes spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+    @keyframes pulseScale {
+      0% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.02); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.9; }
+    }
+
+    .awards-page { padding-top: 0; } 
+    @media (max-width: 991px) { .awards-page { padding-top: 0; } }
+
+    .section-title { font-size: 2.8rem; font-weight: 700; color: var(--burgundy); margin-bottom: 0.5rem; }
+    .section-subtitle { color: var(--gold); letter-spacing: 3px; font-size: 1rem; text-transform: uppercase; margin-bottom: 2rem; }
+
+    .filter-btn-group { text-align: center; margin: 45px 0 25px; }
+    .filter-btn {
+      background: transparent; border: 1px solid var(--gold); color: var(--burgundy); padding: 10px 28px; margin: 0 8px;
+      font-weight: 600; border-radius: 40px; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1.5px;
+    }
+    .filter-btn:hover, .filter-btn.active { background: var(--burgundy); color: var(--cream); border-color: var(--burgundy); box-shadow: 0 8px 20px rgba(128,0,32,0.3); }
+
+    .award-card {
+      background: rgba(255,255,255,0.75); backdrop-filter: blur(4px); border: 1px solid rgba(193,154,107,0.2);
+      border-radius: 24px; padding: 30px 20px; box-shadow: 0 15px 35px -10px rgba(0,0,0,0.1);
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.4s, border-color 0.3s;
+      height: 100%; border-bottom: 4px solid var(--gold); opacity: 0; transform: translateY(30px); transition: all 0.6s; cursor: pointer;
+    }
+    .award-card.revealed { opacity: 1; transform: translateY(0); }
+    .award-card:hover {
+      transform: translateY(-12px) scale(1.01); box-shadow: 0 30px 45px -12px rgba(128,0,32,0.25);
+      border-color: var(--burgundy);
+    }
+    .award-icon { font-size: 3.8rem; color: var(--gold); margin-bottom: 15px; }
+    .award-card h3 { font-size: 1.8rem; color: var(--burgundy); margin-bottom: 5px; }
+    .award-meta { color: var(--gold); font-weight: 600; letter-spacing: 1px; }
+    .award-desc { color: #2c2c2c; font-weight: 400; margin-top: 15px; border-top: 1px dashed rgba(193,154,107,0.4); padding-top: 15px; }
+
+    .counter-section { background: linear-gradient(145deg, #1e100b, #2b1b15); padding: 70px 0; margin: 70px 0; color: white; }
+    .counter-box { text-align: center; border-right: 1px solid rgba(193,154,107,0.2); padding: 0 20px; }
+    .counter-box:last-child { border-right: none; }
+    .counter-num { font-size: 4rem; font-weight: 800; font-family: 'Playfair Display', serif; color: var(--gold); line-height: 1; }
+    .counter-label { font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase; color: var(--cream); }
+    @media (max-width: 768px) { .counter-box { border-right: none; border-bottom: 1px solid rgba(193,154,107,0.2); padding: 25px 0; } }
+
+    .timeline { position: relative; padding: 40px 0; }
+    .timeline::before {
+      content: ''; position: absolute; left: 20px; top: 20px; bottom: 20px; width: 3px;
+      background: linear-gradient(to bottom, var(--gold), var(--burgundy), var(--gold));
+      border-radius: 6px;
+    }
+    @media (min-width: 768px) { .timeline::before { left: 50%; transform: translateX(-50%); } }
+    .timeline-item {
+      position: relative; margin-bottom: 50px; opacity: 0; transform: translateX(-30px); transition: all 0.7s;
+    }
+    .timeline-item.slide-in { opacity: 1; transform: translateX(0); }
+    .timeline-year {
+      background: var(--burgundy); color: var(--gold); display: inline-block; padding: 8px 30px;
+      font-size: 1.8rem; font-weight: 700; border-radius: 50px; letter-spacing: 3px; box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+    }
+    .timeline-content { background: white; border-radius: 28px; padding: 25px; margin-top: 15px; box-shadow: 0 12px 35px -8px rgba(128,0,32,0.15); border-left: 5px solid var(--gold); }
+
+    .gallery-thumb {
+      position: relative; border-radius: 24px; overflow: hidden; cursor: pointer; box-shadow: 0 15px 25px -8px rgba(0,0,0,0.2);
+      transition: transform 0.4s; border: 2px solid transparent; background: var(--cream);
+    }
+    .gallery-thumb img { width: 100%; height: 260px; object-fit: cover; transition: transform 0.6s; }
+    .gallery-thumb:hover img { transform: scale(1.07); }
+    .gallery-thumb:hover { border-color: var(--gold); transform: translateY(-5px); }
+
+    .modal-content { background: transparent; border: none; }
+    .modal-body { padding: 0; border-radius: 32px; overflow: hidden; border: 3px solid var(--gold); }
+
+    .scroll-top {
+      position: fixed; bottom: 40px; right: 40px; width: 55px; height: 55px; border-radius: 50%;
+      background: var(--burgundy); color: var(--gold); border: none; font-size: 24px; cursor: pointer;
+      box-shadow: 0 8px 20px rgba(128,0,32,0.4); transition: 0.3s; z-index: 99; opacity: 0; visibility: hidden;
+    }
+    .scroll-top.show { opacity: 1; visibility: visible; }
+    .scroll-top:hover { background: var(--gold); color: var(--burgundy); transform: scale(1.1); box-shadow: 0 10px 30px #c19a6b; }
+
+    .fade-up { opacity: 0; transform: translateY(30px); transition: 0.7s; }
+    .fade-up.appear { opacity: 1; transform: translateY(0); }
+
+    .luxury-modal .modal-content { background: var(--cream); border-radius: 32px; border: 2px solid var(--gold); overflow: hidden; }
+    .luxury-modal .modal-body { padding: 0; border: none; }
+    .modal-inner { display: flex; flex-wrap: wrap; }
+    .modal-img-col { flex: 0 0 100%; max-width: 100%; padding: 0; }
+    .modal-content-col { flex: 0 0 100%; max-width: 100%; padding: 2rem; background: var(--cream); }
+    @media (min-width: 768px) {
+      .modal-img-col { flex: 0 0 45%; max-width: 45%; }
+      .modal-content-col { flex: 0 0 55%; max-width: 55%; }
+    }
+    .modal-img-col img { width: 100%; height: 100%; object-fit: cover; min-height: 280px; }
+    .modal-content-col h2 { color: var(--burgundy); font-size: 2.2rem; margin-bottom: 0.3rem; }
+    .modal-content-col .modal-meta { color: var(--gold); font-weight: 600; letter-spacing: 1px; border-bottom: 1px dashed var(--gold); padding-bottom: 1rem; margin-bottom: 1rem; }
+    .modal-content-col p { color: #2c2c2c; line-height: 1.7; }
+    .modal-close-btn { position: absolute; top: 15px; right: 20px; background: var(--burgundy); color: var(--gold); border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.4rem; line-height: 1; z-index: 10; cursor: pointer; transition: 0.3s; }
+    .modal-close-btn:hover { background: var(--gold); color: var(--burgundy); transform: scale(1.1); }
+
+    .clickable-subtitle { cursor: pointer; transition: all 0.3s; display: inline-block; }
+    .clickable-subtitle:hover { color: var(--burgundy); transform: scale(1.02); text-decoration: underline; text-underline-offset: 8px; text-decoration-color: var(--gold); }
+
+    /* Full width carousel hero */
+    .hero-carousel { height: 80vh; min-height: 600px; }
+    .hero-carousel .carousel-item { height: 80vh; min-height: 600px; background-size: cover; background-position: center; }
+    .hero-carousel .carousel-item::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+    .hero-carousel .carousel-item .container { position: relative; z-index: 5; height: 100%; display: flex; align-items: center; }
+    .hero-carousel .carousel-content { max-width: 650px; color: white; animation: fadeInUp 1s ease; }
+    .hero-carousel .carousel-content h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.2; }
+    .hero-carousel .carousel-content p { font-family: 'Poppins', sans-serif; font-size: 1.3rem; font-weight: 300; border-left: 4px solid var(--gold); padding-left: 25px; margin-bottom: 0; }
+    @media (max-width: 768px) {
+      .hero-carousel .carousel-content h1 { font-size: 3rem; }
+      .hero-carousel .carousel-content p { font-size: 1.1rem; }
+      .hero-carousel, .hero-carousel .carousel-item { height: 70vh; min-height: 500px; }
+    }
+    @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+    /* remove any default spacing */
+    .navbar + .awards-page .hero-carousel { margin-top: 0; }
+    body { overflow-x: hidden; }
+  </style>
+</head>
+<body>
+
+  <div id="preloader">
+    <div class="preloader-content">
+      <img src="../images/logo.png" alt="Vinegar Food Restaurant">
+      <div class="gold-spinner"></div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg fixed-top vinegar-navbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <img src="../images/logo.png" class="logo-img" alt="Vinegar Logo" style="height:55px;">
+        <span class="logo-text">VINEGAR</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#vinegarNav">
+        <span class="fa fa-bars text-white"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="vinegarNav">
+        <ul class="navbar-nav mx-auto text-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active-link" href="about.html">About us</a></li>
+          <li class="nav-item"><a class="nav-link" href="meals.html">Meals</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="catering.html">Catering</a></li>
+          <li class="nav-item"><a class="nav-link" href="recipe.html">Recipe</a></li>
+          <li class="nav-item"><a class="nav-link" href="awards.html">Awards</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact us</a></li>
+          <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="awards-page">
+    
+    <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel" data-bs-interval="3500" data-bs-pause="false">
+      <div class="carousel-inner h-100">
+        <div class="carousel-item active h-100" style="background-image: url('../images/carousel1.jpg');">
+          <div class="container h-100">
+            <div class="carousel-content">
+              <h1>Our Achievements & Excellence</h1>
+              <p>Culinary artistry recognized across the globe — a legacy of passion, precision, and perfection.</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item h-100" style="background-image: url('../images/carousel2.jpg');">
+          <div class="container h-100">
+            <div class="carousel-content">
+              <h1>Our Achievements & Excellence</h1>
+              <p>Culinary artistry recognized across the globe — a legacy of passion, precision, and perfection.</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item h-100" style="background-image: url('../images/carousel3.jpg');">
+          <div class="container h-100">
+            <div class="carousel-content">
+              <h1>Our Achievements & Excellence</h1>
+              <p>Culinary artistry recognized across the globe — a legacy of passion, precision, and perfection.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <div class="container">
+      <div class="filter-btn-group">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="national">National</button>
+        <button class="filter-btn" data-filter="international">International</button>
+        <button class="filter-btn" data-filter="culinary">Culinary</button>
+        <button class="filter-btn" data-filter="excellence">Excellence</button>
+      </div>
+
+      <div class="row g-4 awards-grid">
+        <div class="col-lg-4 col-md-6 award-item" data-category="international culinary">
+          <div class="award-card" data-bs-toggle="modal" data-bs-target="#awardModal1">
+            <div class="award-icon"><i class="fas fa-star"></i></div>
+            <h3>Michelin Star</h3>
+            <div class="award-meta">Michelin Guide · 2023</div>
+            <p class="award-desc">Three-star recognition for outstanding culinary mastery and service.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 award-item" data-category="international excellence">
+          <div class="award-card" data-bs-toggle="modal" data-bs-target="#awardModal2">
+            <div class="award-icon"><i class="fas fa-globe"></i></div>
+            <h3>World's 50 Best</h3>
+            <div class="award-meta">Restaurant Academy · 2024</div>
+            <p class="award-desc">Ranked #12 among the world's finest dining experiences.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 award-item" data-category="national culinary">
+          <div class="award-card" data-bs-toggle="modal" data-bs-target="#awardModal3">
+            <div class="award-icon"><i class="fas fa-utensils"></i></div>
+            <h3>Chef of the Year</h3>
+            <div class="award-meta">National Restaurant Awards · 2023</div>
+            <p class="award-desc">Executive chef awarded for innovative tasting menus.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 award-item" data-category="excellence national">
+          <div class="award-card" data-bs-toggle="modal" data-bs-target="#awardModal4">
+            <div class="award-icon"><i class="fas fa-wine-glass-alt"></i></div>
+            <h3>Best Wine Program</h3>
+            <div class="award-meta">Wine Spectator · 2022</div>
+            <p class="award-desc">Award of excellence for exceptional wine cellar & pairing.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 award-item" data-category="international excellence">
+          <div class="award-card" data-bs-toggle="modal" data-bs-target="#awardModal5">
+            <div class="award-icon"><i class="fas fa-medal"></i></div>
+            <h3>Luxury Restaurant Award</h3>
+            <div class="award-meta">International Hospitality Institute · 2024</div>
+            <p class="award-desc">Best fine-dining interior and guest experience.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 award-item" data-category="culinary excellence">
+          <div class="award-card" data-bs-toggle="modal" data-bs-target="#awardModal6">
+            <div class="award-icon"><i class="fas fa-crown"></i></div>
+            <h3>Sustainable Kitchen</h3>
+            <div class="award-meta">Green Culinary Awards · 2023</div>
+            <p class="award-desc">Pioneering zero-waste fine dining practices.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="counter-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-6 counter-box"><div class="counter-num"><span class="counter" data-target="1000">0</span>+</div><div class="counter-label">Branches</div></div>
+          <div class="col-md-3 col-6 counter-box"><div class="counter-num"><span class="counter" data-target="240000">0</span>+</div><div class="counter-label">Delicacies</div></div>
+          <div class="col-md-3 col-6 counter-box"><div class="counter-num"><span class="counter" data-target="72">0</span></div><div class="counter-label">Rotating Menus</div></div>
+          <div class="col-md-3 col-6 counter-box"><div class="counter-num"><span class="counter" data-target="50">0</span>+</div><div class="counter-label">Nat. & Int. Awards</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container my-5">
+      <h2 class="section-title text-center">Milestones of Vinegar Food Restaurant</h2>
+      <div class="section-subtitle text-center">— a journey through excellence —</div>
+      <div class="timeline mt-5">
+        <div class="row timeline-item">
+          <div class="col-md-6 text-md-end"><span class="timeline-year">2015</span></div>
+          <div class="col-md-6"><div class="timeline-content"><h4>First International Recognition</h4><p>Best Newcomer at the World Food Awards, London.</p></div></div>
+        </div>
+        <div class="row timeline-item">
+          <div class="col-md-6 text-md-end"><span class="timeline-year">2018</span></div>
+          <div class="col-md-6"><div class="timeline-content"><h4>National Culinary Champion</h4><p>Won 5 gold medals at the National Culinary Olympics.</p></div></div>
+        </div>
+        <div class="row timeline-item">
+          <div class="col-md-6 text-md-end"><span class="timeline-year">2021</span></div>
+          <div class="col-md-6"><div class="timeline-content"><h4>Michelin Star & Sustainability</h4><p>First Michelin star & green star for sustainable gastronomy.</p></div></div>
+        </div>
+        <div class="row timeline-item">
+          <div class="col-md-6 text-md-end"><span class="timeline-year">2024</span></div>
+          <div class="col-md-6"><div class="timeline-content"><h4>Global Icon Award</h4><p>Recognized among top 10 luxury restaurant brands worldwide.</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container my-5 pt-4">
+      <h2 class="section-title text-center">Certificate Gallery</h2>
+      <div class="section-subtitle text-center clickable-subtitle" id="gallerySubtitle">— click to enlarge —</div>
+      <div class="row g-4 mt-3" id="certificateGallery">
+        <div class="col-md-4"><div class="gallery-thumb" data-bs-toggle="modal" data-bs-target="#certModal1"><img src="../images/certificate1.jpg" alt="award cert 1" loading="lazy"></div></div>
+        <div class="col-md-4"><div class="gallery-thumb" data-bs-toggle="modal" data-bs-target="#certModal2"><img src="../images/certificate2.jpg" alt="award cert 2" loading="lazy"></div></div>
+        <div class="col-md-4"><div class="gallery-thumb" data-bs-toggle="modal" data-bs-target="#certModal3"><img src="../images/certificate3.jpg" alt="award cert 3" loading="lazy"></div></div>
+        <div class="col-md-4"><div class="gallery-thumb" data-bs-toggle="modal" data-bs-target="#certModal4"><img src="../images/certificate4.jpg" alt="award cert 4" loading="lazy"></div></div>
+        <div class="col-md-4"><div class="gallery-thumb" data-bs-toggle="modal" data-bs-target="#certModal5"><img src="../images/certificate5.jpg" alt="award cert 5" loading="lazy"></div></div>
+        <div class="col-md-4"><div class="gallery-thumb" data-bs-toggle="modal" data-bs-target="#certModal6"><img src="../images/certificate6.jpg" alt="award cert 6" loading="lazy"></div></div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="main-footer pt-5 pb-3">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <h2 class="footer-logo mb-4">VINEGAR<span>FOOD</span></h2>
+          <p class="footer-text">Where every flavor tells a story. From our first kitchen to 1000+ global destinations, we redefine the art of dining with passion and heritage.</p>
+          <div class="social-links mt-4">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 ms-lg-auto">
+          <h5 class="footer-heading">Explore</h5>
+          <ul class="footer-links">
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Reservations</a></li>
+            <li><a href="#">Our Branches</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h5 class="footer-heading">Visit Us</h5>
+          <p class="footer-contact"><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Food District, Karachi</p>
+          <p class="footer-contact"><i class="fas fa-phone"></i> +92 300 1234567</p>
+          <p class="footer-contact"><i class="fas fa-envelope"></i> info@vinegarfood.com</p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h5 class="footer-heading">Newsletter</h5>
+          <p class="footer-text">Get exclusive offers & recipes.</p>
+          <div class="newsletter-box mt-3">
+            <input type="email" placeholder="Your Email">
+            <button><i class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
+      <hr class="footer-divider">
+      <div class="footer-bottom d-md-flex justify-content-between align-items-center">
+        <p class="mb-0">&copy; 2024 Vinegar Food. Crafted for Excellence.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#" class="ms-3">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop"><i class="fas fa-chevron-up"></i></button>
+
+  
+  <div class="modal fade luxury-modal" id="awardModal1" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-body p-0"><div class="modal-inner"><div class="modal-img-col"><img src="../images/award1.jpg" alt="Michelin Star"></div><div class="modal-content-col"><button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">×</button><h2>Michelin Star</h2><div class="modal-meta">Michelin Guide · 2023</div><p>Vinegar Food Restaurant is honoured with three Michelin stars for its uncompromising commitment to culinary artistry. Our tasting menus reflect decades of refinement, using only the finest seasonal ingredients. The intimate dining experience is orchestrated by Chef de Cuisine with flawless precision.</p><p>This recognition places us among an elite group of restaurants worldwide, celebrating innovation and respect for tradition.</p></div></div></div></div></div></div>
+  <div class="modal fade luxury-modal" id="awardModal2" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-body p-0"><div class="modal-inner"><div class="modal-img-col"><img src="../images/award2.jpg" alt="World's 50 Best"></div><div class="modal-content-col"><button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">×</button><h2>World's 50 Best</h2><div class="modal-meta">Restaurant Academy · 2024</div><p>Ranked #12 in the World's 50 Best Restaurants, Vinegar Food stands as a beacon of contemporary gastronomy. Voted by an international academy of chefs and critics, this award highlights our distinctive flavour philosophy and exceptional service.</p><p>Our position on the list reflects growing global appreciation for our signature dishes and wine program.</p></div></div></div></div></div></div>
+  <div class="modal fade luxury-modal" id="awardModal3" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-body p-0"><div class="modal-inner"><div class="modal-img-col"><img src="../images/award3.jpg" alt="Chef of the Year"></div><div class="modal-content-col"><button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">×</button><h2>Chef of the Year</h2><div class="modal-meta">National Restaurant Awards · 2023</div><p>Executive Chef Isabella Rossi was named National Chef of the Year for her revolutionary approach to flavour pairing and dedication to mentorship. Her tasting menus at Vinegar Food have become a benchmark for emerging chefs.</p><p>Chef Rossi's philosophy combines local heritage with modern techniques, earning widespread acclaim.</p></div></div></div></div></div></div>
+  <div class="modal fade luxury-modal" id="awardModal4" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-body p-0"><div class="modal-inner"><div class="modal-img-col"><img src="../images/award4.jpg" alt="Best Wine Program"></div><div class="modal-content-col"><button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">×</button><h2>Best Wine Program</h2><div class="modal-meta">Wine Spectator · 2022</div><p>Wine Spectator's Grand Award honours our cellar of over 2,500 labels from prestigious vineyards. Our sommelier team designs pairings that elevate every dish, with rare vintages and boutique producers.</p><p>The program includes exclusive wine dinners and vineyard immersion experiences for guests.</p></div></div></div></div></div></div>
+  <div class="modal fade luxury-modal" id="awardModal5" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-body p-0"><div class="modal-inner"><div class="modal-img-col"><img src="../images/award5.jpg" alt="Luxury Restaurant Award"></div><div class="modal-content-col"><button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">×</button><h2>Luxury Restaurant Award</h2><div class="modal-meta">Intl. Hospitality Institute · 2024</div><p>Recognized for the most exquisite fine-dining interior and guest experience worldwide. From handcrafted tableware to ambient lighting and personalised service, every detail exudes elegance.</p><p>Vinegar Food sets the standard for luxury hospitality, creating unforgettable moments for discerning patrons.</p></div></div></div></div></div></div>
+  <div class="modal fade luxury-modal" id="awardModal6" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-body p-0"><div class="modal-inner"><div class="modal-img-col"><img src="../images/award6.jpg" alt="Sustainable Kitchen"></div><div class="modal-content-col"><button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">×</button><h2>Sustainable Kitchen</h2><div class="modal-meta">Green Culinary Awards · 2023</div><p>Pioneering zero-waste fine dining, we were honoured with the Sustainable Kitchen Award for our closed-loop system. We source from local farms, compost waste, and upcycle ingredients creatively.</p><p>Our rooftop garden supplies fresh herbs and microgreens, reducing our carbon footprint while enhancing flavour.</p></div></div></div></div></div></div>
+
+  <div class="modal fade" id="certModal1" tabindex="-1"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-body p-0"><img src="../images/certificate1.jpg" class="img-fluid" alt="certificate"></div></div></div></div>
+  <div class="modal fade" id="certModal2" tabindex="-1"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-body p-0"><img src="../images/certificate2.jpg" class="img-fluid" alt="certificate"></div></div></div></div>
+  <div class="modal fade" id="certModal3" tabindex="-1"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-body p-0"><img src="../images/certificate3.jpg" class="img-fluid" alt="certificate"></div></div></div></div>
+  <div class="modal fade" id="certModal4" tabindex="-1"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-body p-0"><img src="../images/certificate4.jpg" class="img-fluid" alt="certificate"></div></div></div></div>
+  <div class="modal fade" id="certModal5" tabindex="-1"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-body p-0"><img src="../images/certificate5.jpg" class="img-fluid" alt="certificate"></div></div></div></div>
+  <div class="modal fade" id="certModal6" tabindex="-1"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-body p-0"><img src="../images/certificate6.jpg" class="img-fluid" alt="certificate"></div></div></div></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      setTimeout(function(){
+        $('#preloader').fadeOut(800);
+      }, 1500);
+
+      $(window).scroll(function(){
+        if ($(this).scrollTop() > 50) $('.navbar').addClass('scrolled');
+        else $('.navbar').removeClass('scrolled');
+      });
+
+      $('.filter-btn').click(function(){
+        $('.filter-btn').removeClass('active');
+        $(this).addClass('active');
+        let filterValue = $(this).data('filter');
+        if (filterValue === 'all') {
+          $('.award-item').fadeIn(300);
+        } else {
+          $('.award-item').each(function(){
+            let cats = $(this).data('category').split(' ');
+            if (cats.includes(filterValue)) $(this).fadeIn(300);
+            else $(this).fadeOut(200);
+          });
+        }
+      });
+
+      function isInView(el) {
+        let top = el.getBoundingClientRect().top;
+        return top < window.innerHeight - 80;
+      }
+
+      let counters = document.querySelectorAll('.counter');
+      function startCounters() {
+        counters.forEach(counter => {
+          if (!counter.classList.contains('counted') && isInView(counter)) {
+            counter.classList.add('counted');
+            let target = +counter.dataset.target;
+            let start = 0;
+            let increment = target / 70;
+            let updateCounter = setInterval(() => {
+              start += increment;
+              if (start >= target) {
+                counter.innerText = target;
+                clearInterval(updateCounter);
+              } else {
+                counter.innerText = Math.floor(start);
+              }
+            }, 20);
+          }
+        });
+      }
+
+      function revealCards() {
+        $('.award-card, .timeline-item, .gallery-thumb').each(function(){
+          let el = $(this);
+          if (el.hasClass('revealed') || el.hasClass('slide-in')) return;
+          let rect = el[0].getBoundingClientRect();
+          if (rect.top < window.innerHeight - 80) {
+            if (el.hasClass('award-card')) el.addClass('revealed');
+            else if (el.hasClass('timeline-item')) el.addClass('slide-in');
+            else el.addClass('appear');
+          }
+        });
+      }
+
+      $(window).on('scroll', function(){
+        startCounters();
+        revealCards();
+        if ($(this).scrollTop() > 400) $('#scrollTop').addClass('show');
+        else $('#scrollTop').removeClass('show');
+      });
+     
+      revealCards();
+      startCounters();
+
+      $('#scrollTop').click(function(){
+        $('html, body').animate({ scrollTop: 0 }, 800);
+      });
+
+      $('#gallerySubtitle').click(function(){
+        $('html, body').animate({ scrollTop: $('#certificateGallery').offset().top - 100 }, 800);
+      });
+
+      setTimeout(revealCards, 1700);
+    });
+  </script>
+
+  <style>
+    .vinegar-navbar{ background: rgba(0,0,0,0.25); padding: 14px 0; transition: 0.4s; }
+    .vinegar-navbar.scrolled{ background:#111; border-bottom:2px solid #8B0000; }
+    .logo-img{ height:55px; }
+    .logo-text{ font-family:'Playfair Display',serif; font-weight:700; color:#C19A6B; letter-spacing:2px; }
+    .navbar .nav-link{ color: #ffffff !important; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin: 0 10px; position: relative; transition: color 0.3s; }
+    .navbar .nav-link:hover{ color: #C19A6B !important; }
+    .navbar .nav-link::after{ content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: #C19A6B; transition: width 0.3s ease; }
+    .navbar .nav-link:hover::after{ width: 100%; }
+    
+    .main-footer { background-color: #0e0b09; color: var(--white); border-top: 1px solid rgba(228, 197, 144, 0.1); padding: 80px 0 30px; }
+    .footer-heading { color: #c19a6b; font-family: 'Playfair Display', serif; position: relative; padding-bottom: 15px; }
+    .footer-heading::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background: #c19a6b; }
+    .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: 0.3s; }
+    .footer-links a:hover { color: #c19a6b; padding-left: 10px; }
+    .social-links a { background: #1a1a1a; color: #c19a6b; display: inline-block; width: 40px; height: 40px; text-align: center; line-height: 40px; border-radius: 50%; margin-right: 10px; transition: 0.4s; border: 1px solid rgba(228, 197, 144, 0.2); }
+    .social-links a:hover { background: #c19a6b; color: #0e0b09; transform: translateY(-5px); }
+    .newsletter-box { border-bottom: 1px solid #c19a6b; display: flex; }
+    .newsletter-box input { background: transparent; border: none; color: #fff; flex: 1; padding: 8px 0; }
+    .newsletter-box button { background: none; border: none; color: #c19a6b; }
+    .footer-divider { border-color: rgba(193,154,107,0.2); }
+    .footer-bottom a { color: rgba(255,255,255,0.7); text-decoration: none; }
+    .footer-bottom a:hover { color: #c19a6b; }
+  </style>
+</body>
+</html>
