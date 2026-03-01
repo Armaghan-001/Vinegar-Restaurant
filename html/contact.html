@@ -3,149 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | Vinegar Food</title>
+    <title>Contact Us - Vinegar Food</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="contact.css"> <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="/css/contact.css">
-</head>
-<body class="bg-charcoal">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand" href="index.html">
-            <img src="../images/logo.png" alt="Vinegar Food Logo">
-            <span class="brand-text">VINEGAR</span>
-        </a>
+    <style>
+        :root {
+            --gold-crayola: #C19A6B;
+            --primary-burgundy: #8B0000;
+            --smoky-black-2: #111111;
+            --white: #ffffff;
+            --eerie-black: #1a1a1a;
+            --camel-accent: #C19A6B;
+        }
+
+        body {
+            background-color: #0b0b0b;
+            color: var(--white);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR STYLES (AS PROVIDED) ===== */
+        .vinegar-navbar {
+            background: rgba(0,0,0,0.25);
+            padding: 14px 0;
+            transition: 0.4s;
+        }
+        .vinegar-navbar.scrolled {
+            background: #111;
+            border-bottom: 2px solid #8B0000;
+        }
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: #C19A6B;
+            letter-spacing: 2px;
+        }
+        .navbar .nav-link {
+            color: #ffffff !important;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 10px;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .navbar .nav-link:hover, .active-link {
+            color: #C19A6B !important;
+        }
+        .navbar .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #C19A6B;
+            transition: width 0.3s ease;
+        }
+        .navbar .nav-link:hover::after, .active-link::after {
+            width: 100%;
+        }
+
+        /* ===== CONTACT PAGE CUSTOM STYLES ===== */
+        .contact-hero {
+            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .booking-form {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid var(--camel-accent);
+            backdrop-filter: blur(5px);
+            padding: 40px;
+        }
+
+        .custom-input {
+            background: transparent !important;
+            border: none;
+            border-bottom: 1px solid #444 !important;
+            color: white !important;
+            border-radius: 0;
+            padding: 12px 5px;
+        }
+
+        .custom-input:focus {
+            box-shadow: none;
+            border-bottom-color: var(--camel-accent) !important;
+        }
+
+        .custom-input::placeholder {
+            color: #ffffff !important;
+            opacity: 0.7;
+        }
+
+        .btn-gold {
+            background: var(--gold-crayola);
+            color: #000;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border: none;
+            padding: 15px;
+            transition: 0.4s;
+        }
+
+        .btn-gold:hover {
+            background: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* ===== FOOTER STYLES (AS PROVIDED) ===== */
+        .main-footer {
+            background-color: var(--smoky-black-2);
+            color: var(--white);
+            border-top: 1px solid rgba(228, 197, 144, 0.1);
+            padding: 80px 0 30px;
+        }
+        .footer-heading {
+            color: var(--gold-crayola);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 40px; height: 2px;
+            background: var(--gold-crayola);
+        }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: 0.3s; display: block; margin-bottom: 10px; }
+        .footer-links a:hover { color: var(--gold-crayola); padding-left: 10px; }
         
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="fa fa-bars"></span>
-        </button>
+        .social-links a {
+            background: var(--eerie-black);
+            color: var(--gold-crayola);
+            display: inline-block;
+            width: 40px; height: 40px;
+            text-align: center; line-height: 40px;
+            border-radius: 50%; margin-right: 10px;
+            border: 1px solid rgba(228, 197, 144, 0.2);
+            transition: 0.4s;
+        }
+        .social-links a:hover { background: var(--gold-crayola); color: #000; transform: translateY(-5px); }
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about.html">About us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="meals.html">Meals</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="gallery.html">Gallery</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active-link" href="catering.html">Catering</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="recipe.html">Recipe</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="awards.html">Awards</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="feedback.html">Feedback</a>
-                </li>
-            </ul>
-        </div>
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top vinegar-navbar">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <img src="../images/logo.png" class="logo-img" alt="Logo" style="height:55px;">
+      <span class="logo-text">VINEGAR</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#vinegarNav">
+      <span class="fa fa-bars text-white"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="vinegarNav">
+      <ul class="navbar-nav mx-auto text-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
+        <li class="nav-item"><a class="nav-link" href="meals.html">Meals</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="catering.html">Catering</a></li>
+        <li class="nav-item"><a class="nav-link" href="recipe.html">Recipe</a></li>
+        <li class="nav-item"><a class="nav-link" href="awards.html">Awards</a></li>
+        <li class="nav-item"><a class="nav-link active-link" href="contact.html">Contact us</a></li>
+        <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+      </ul>
     </div>
+  </div>
 </nav>
 
-    <section class="contact-header">
-        <div class="header-overlay"></div>
-        <div class="container text-center position-relative">
-            <h1 class="display-3 gold-text">Get In Touch</h1>
-            <p class="lead text-white">We'd Love to Hear From You</p>
-        </div>
-    </section>
+<section class="contact-hero">
+    <div class="text-center reveal">
+        <h1 class="logo-text display-3">CONTACT US</h1>
+        <p class="text-white">Get in touch with the masters of flavor</p>
+    </div>
+</section>
 
-    <section class="contact-section py-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-5">
-                    <div class="info-wrapper">
-                        <h2 class="gold-text mb-4">Contact Information</h2>
-                        
-                        <div class="contact-card">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h5>Our Location</h5>
-                                <p>123 Luxury Avenue, Food District, Karachi</p>
-                            </div>
-                        </div>
-
-                        <div class="contact-card">
-                            <i class="fas fa-phone-alt"></i>
-                            <div>
-                                <h5>Call Us</h5>
-                                <p>+92 300 1234567</p>
-                            </div>
-                        </div>
-
-                        <div class="contact-card">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h5>Email Address</h5>
-                                <p>info@vinegarfood.com</p>
-                            </div>
-                        </div>
-
-                        <div class="social-box mt-5">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
+<section class="py-5 my-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-5 reveal">
+                <h2 class="footer-heading mb-4">Visit Our Kitchen</h2>
+                <p style="color: rgba(255,255,255,0.7);">Experience hospitality like never before. Reach out for bookings, events, or just to say hi.</p>
+                
+                <div class="mt-4">
+                    <p><i class="fas fa-map-marker-alt text-gold me-2"></i> 123 Luxury Avenue, Karachi</p>
+                    <p><i class="fas fa-phone text-gold me-2"></i> +92 300 1234567</p>
+                    <p><i class="fas fa-envelope text-gold me-2"></i> info@vinegarfood.com</p>
                 </div>
+            </div>
 
-                <div class="col-lg-7">
-                    <div class="form-container">
-                        <form id="contactForm">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" placeholder="Your Name" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="email" class="form-control" placeholder="Email Address" required>
-                                </div>
-                                <div class="col-12">
-                                    <input type="text" class="form-control" placeholder="Subject">
-                                </div>
-                                <div class="col-12">
-                                    <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-gold w-100">SEND MESSAGE</button>
-                                </div>
+            <div class="col-lg-7 reveal">
+                <div class="booking-form">
+                    <form action="#">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <input type="text" class="custom-input w-100" placeholder="NAME">
                             </div>
-                        </form>
-                    </div>
+                            <div class="col-md-6 mb-4">
+                                <input type="email" class="custom-input w-100" placeholder="EMAIL">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" class="custom-input w-100" placeholder="SUBJECT">
+                        </div>
+                        <div class="mb-4">
+                            <textarea class="custom-input w-100" rows="4" placeholder="MESSAGE"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gold w-100">SEND MESSAGE</button>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
-
-    <div class="map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.000000000000!2d67.0!3d24.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e!2sKarachi!5e0!3m2!1sen!2spk!4v1700000000000" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
+</section>
 
-    <footer class="main-footer py-4 text-center">
-        <p class="mb-0">&copy; 2026 Vinegar Food. All Rights Reserved.</p>
-    </footer>
+<footer class="main-footer pt-5 pb-3">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h2 class="logo-text mb-4">VINEGAR<span style="color:white">FOOD</span></h2>
+                <p class="footer-text">Where every flavor tells a story. From our first kitchen to 1000+ global destinations.</p>
+                <div class="social-links mt-4">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
 
-    <script>
-    $(window).scroll(function() {
-    if ($(this).scrollTop() > 50) {
-        $('.navbar').addClass('scrolled');
-    } else {
-        $('.navbar').removeClass('scrolled');
-    }
-});
+            <div class="col-lg-2 col-md-6 mb-4 ms-lg-auto">
+                <h5 class="footer-heading">Explore</h5>
+                <ul class="footer-links">
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Reservations</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="footer-heading">Visit Us</h5>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Karachi</p>
+                <p><i class="fas fa-phone"></i> +92 300 1234567</p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="footer-heading">Newsletter</h5>
+                <div class="d-flex border-bottom border-secondary pb-2">
+                    <input type="email" placeholder="Your Email" class="bg-transparent border-0 text-white w-100 outline-none" style="outline: none;">
+                    <button class="bg-transparent border-0 text-gold"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+        <hr style="background: rgba(228, 197, 144, 0.2);">
+        <div class="text-center">
+            <p>&copy; 2024 Vinegar Food. Crafted for Excellence.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Navbar scroll effect
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
+            
+            // Reveal animation on scroll
+            $('.reveal').each(function() {
+                var windowHeight = $(window).height();
+                var revealTop = $(this).get(0).getBoundingClientRect().top;
+                if (revealTop < windowHeight - 100) {
+                    $(this).addClass('active');
+                }
+            });
+        });
+        
+        // Initial check for reveal
+        $(window).trigger('scroll');
+    });
 </script>
+
 </body>
 </html>
