@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinegar | Your Experience Matters</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+  
+    body {
+      background-color: #121212;
+      color: #FFFFFF;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+    
+    .vinegar-navbar {
+      background: rgba(0,0,0,0.25);
+      padding: 14px 0;
+      transition: 0.4s;
+      z-index: 1030;
+    }
+    .vinegar-navbar.scrolled {
+      background:#111;
+      border-bottom:2px solid #8B0000;
+    }
+    .logo-img {
+      height:55px;
+    }
+    .logo-text {
+      font-family:'Playfair Display',serif;
+      font-weight:700;
+      color:#C19A6B;
+      letter-spacing:2px;
+    }
+    .navbar .nav-link {
+      color: #ffffff !important;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0 10px;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .navbar .nav-link:hover {
+      color: #C19A6B !important;
+    }
+    .navbar .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #C19A6B;
+      transition: width 0.3s ease;
+    }
+    .navbar .nav-link:hover::after {
+      width: 100%;
+    }
+  
+    :root {
+      --gold-crayola: #C19A6B;
+      --smoky-black-2: #1A1A1A;
+      --eerie-black: #121212;
+      --white: #FFFFFF;
+      --font-royal: 'Playfair Display', serif;
+    }
+    .main-footer {
+      background-color: var(--smoky-black-2);
+      color: var(--white);
+      border-top: 1px solid rgba(228, 197, 144, 0.1);
+      padding: 80px 0 30px;
+    }
+    .footer-heading {
+      color: var(--gold-crayola);
+      font-family: var(--font-royal);
+      position: relative;
+      padding-bottom: 15px;
+    }
+    .footer-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--gold-crayola);
+    }
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .footer-links a:hover {
+      color: var(--gold-crayola);
+      padding-left: 10px;
+    }
+    .social-links a {
+      background: var(--eerie-black);
+      color: var(--gold-crayola);
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      transition: 0.4s;
+      border: 1px solid rgba(228, 197, 144, 0.2);
+    }
+    .social-links a:hover {
+      background: var(--gold-crayola);
+      color: var(--smoky-black-1);
+      transform: translateY(-5px);
+    }
+    .newsletter-box {
+      border-bottom: 1px solid var(--gold-crayola);
+      display: flex;
+    }
+    .newsletter-box input {
+      background: transparent;
+      border: none;
+      padding: 8px 0;
+      width: 100%;
+      color: var(--white);
+      outline: none;
+    }
+    .newsletter-box button {
+      background: transparent;
+      border: none;
+      color: var(--gold-crayola);
+      cursor: pointer;
+    }
+    .footer-divider {
+      border-color: rgba(193, 154, 107, 0.2);
+    }
+    .footer-bottom a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-bottom a:hover {
+      color: #C19A6B;
+    }
+    /* Loader */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #121212;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.6s ease-out;
+    }
+    .loader-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: #C19A6B;
+      letter-spacing: 6px;
+      text-shadow: 0 0 10px rgba(193, 154, 107, 0.5), 0 0 20px rgba(193, 154, 107, 0.3);
+      animation: goldGlow 2s infinite ease-in-out;
+    }
+    @keyframes goldGlow {
+      0% { opacity: 0.7; text-shadow: 0 0 5px #C19A6B, 0 0 15px #C19A6B; }
+      50% { opacity: 1; text-shadow: 0 0 20px #C19A6B, 0 0 40px #C19A6B; }
+      100% { opacity: 0.7; text-shadow: 0 0 5px #C19A6B, 0 0 15px #C19A6B; }
+    }
+    /* Hero */
+    .hero-section {
+      background: #121212;
+      padding: 160px 0 80px;
+      text-align: center;
+    }
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #FFFFFF;
+    }
+    .hero-subtitle {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .gold-underline {
+      width: 100px;
+      height: 3px;
+      background: #C19A6B;
+      margin: 25px auto 0;
+    }
+    /* Feedback card */
+    .feedback-section {
+      background: #1A1A1A;
+      padding: 80px 0;
+    }
+    .premium-card {
+      background: #121212;
+      border: 1px solid #C19A6B;
+      border-radius: 16px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+      padding: 2.5rem;
+    }
+    .form-label {
+      color: #C19A6B;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .form-control, .form-select {
+      background: #1A1A1A;
+      border: 1px solid #333;
+      border-radius: 8px;
+      color: #FFFFFF;
+      padding: 12px 16px;
+      transition: all 0.3s ease;
+    }
+    .form-control:focus, .form-select:focus {
+      background: #1A1A1A;
+      border-color: #C19A6B;
+      box-shadow: 0 0 0 0.2rem rgba(193, 154, 107, 0.25);
+      color: #FFFFFF;
+    }
+    .form-floating .form-control {
+      height: calc(3.5rem + 2px);
+      line-height: 1.25;
+    }
+    .form-floating label {
+      color: rgba(255,255,255,0.6);
+      font-family: 'Poppins', sans-serif;
+    }
+    .form-floating > .form-control:focus ~ label,
+    .form-floating > .form-control:not(:placeholder-shown) ~ label {
+      color: #C19A6B;
+      opacity: 0.8;
+    }
+    textarea.form-control {
+      min-height: 140px;
+    }
+    .btn-gold {
+      background: #C19A6B;
+      color: #121212;
+      font-weight: 600;
+      padding: 14px 36px;
+      border-radius: 40px;
+      border: none;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+    .btn-gold:hover {
+      background: #b0885c;
+      box-shadow: 0 0 20px rgba(193, 154, 107, 0.6);
+      color: #121212;
+      transform: translateY(-2px);
+    }
+    
+    #scrollTop {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      width: 55px;
+      height: 55px;
+      background: #C19A6B;
+      border: none;
+      border-radius: 50%;
+      color: #121212;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      z-index: 99;
+      transition: all 0.3s ease;
+    }
+    #scrollTop:hover {
+      background: #b0885c;
+      transform: scale(1.08);
+      box-shadow: 0 0 20px #C19A6B;
+    }
+    
+    .fade-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .was-validated .form-control:invalid, .was-validated .form-select:invalid {
+      border-color: #800020;
+    }
+    .was-validated .form-control:valid, .was-validated .form-select:valid {
+      border-color: #C19A6B;
+    }
+    .invalid-feedback {
+      color: #800020;
+      font-weight: 400;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5rem; }
+      .premium-card { padding: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="loader">
+    <div class="loader-logo">VINEGAR</div>
+  </div>
+
+    <nav class="navbar navbar-expand-lg fixed-top vinegar-navbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <img src="../images/logo.png" class="logo-img" alt="Vinegar Logo" style="height:55px;">
+        <span class="logo-text">VINEGAR</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#vinegarNav">
+        <span class="fa fa-bars text-white"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="vinegarNav">
+        <ul class="navbar-nav mx-auto text-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active-link" href="about.html">About us</a></li>
+          <li class="nav-item"><a class="nav-link" href="meals.html">Meals</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="catering.html">Catering</a></li>
+          <li class="nav-item"><a class="nav-link" href="recipe.html">Recipe</a></li>
+          <li class="nav-item"><a class="nav-link" href="awards.html">Awards</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact us</a></li>
+          <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+  <section class="hero-section fade-section">
+    <div class="container">
+      <h1 class="hero-title">Your Experience Matters</h1>
+      <p class="hero-subtitle">We value your feedback, queries, suggestions, and complaints.</p>
+      <div class="gold-underline"></div>
+    </div>
+  </section>
+
+
+  <section class="feedback-section fade-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+          <div class="premium-card">
+            <form id="feedbackForm" class="needs-validation" novalidate>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
+                    <label for="fullName">Full Name <span class="text-gold">*</span></label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="email" class="form-control" id="email" placeholder="Email Address" required>
+                    <label for="email">Email Address <span class="text-gold">*</span></label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="tel" class="form-control" id="phone" placeholder="Phone (optional)">
+                    <label for="phone">Phone (optional)</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <select class="form-select" id="feedbackType" required>
+                      <option value="" selected disabled>Select one</option>
+                      <option value="Feedback">Feedback</option>
+                      <option value="Query">Query</option>
+                      <option value="Suggestion">Suggestion</option>
+                      <option value="Complaint">Complaint</option>
+                    </select>
+                    <label for="feedbackType">Type <span class="text-gold">*</span></label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+                    <label for="subject">Subject <span class="text-gold">*</span></label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control" id="message" placeholder="Your message" style="height: 150px" required></textarea>
+                    <label for="message">Message <span class="text-gold">*</span></label>
+                  </div>
+                </div>
+                <div class="col-12 text-center mt-4">
+                  <button type="submit" class="btn btn-gold">Send message</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer class="main-footer pt-5 pb-3">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <h2 class="footer-logo mb-4">VINEGAR<span>FOOD</span></h2>
+          <p class="footer-text">Where every flavor tells a story. From our first kitchen to 1000+ global destinations, we redefine the art of dining with passion and heritage.</p>
+          <div class="social-links mt-4">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 ms-lg-auto">
+          <h5 class="footer-heading">Explore</h5>
+          <ul class="footer-links">
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Reservations</a></li>
+            <li><a href="#">Our Branches</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h5 class="footer-heading">Visit Us</h5>
+          <p class="footer-contact"><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Food District, Karachi</p>
+          <p class="footer-contact"><i class="fas fa-phone"></i> +92 300 1234567</p>
+          <p class="footer-contact"><i class="fas fa-envelope"></i> info@vinegarfood.com</p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h5 class="footer-heading">Newsletter</h5>
+          <p class="footer-text">Get exclusive offers & recipes.</p>
+          <div class="newsletter-box mt-3">
+            <input type="email" placeholder="Your Email">
+            <button><i class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
+      <hr class="footer-divider">
+      <div class="footer-bottom d-md-flex justify-content-between align-items-center">
+        <p class="mb-0">&copy; 2024 Vinegar Food. Crafted for Excellence.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#" class="ms-3">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  
+  <button id="scrollTop"><i class="fas fa-arrow-up"></i></button>
+
+  
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      
+      setTimeout(function() {
+        $('#loader').fadeOut(600);
+      }, 1500);
+
+      
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 50) {
+          $('.navbar').addClass('scrolled');
+        } else {
+          $('.navbar').removeClass('scrolled');
+        }
+      });
+
+      
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 300) {
+          $('#scrollTop').fadeIn(300);
+        } else {
+          $('#scrollTop').fadeOut(200);
+        }
+      });
+
+      
+      $('#scrollTop').click(function() {
+        $('html, body').animate({ scrollTop: 0 }, 700);
+      });
+
+      
+      function fadeInCheck() {
+        $('.fade-section').each(function() {
+          var windowTop = $(window).scrollTop();
+          var windowBottom = windowTop + $(window).height();
+          var elementTop = $(this).offset().top;
+          var elementBottom = elementTop + $(this).outerHeight();
+          if (elementBottom > windowTop + 100 && elementTop < windowBottom - 100) {
+            $(this).addClass('visible');
+          } else {
+            $(this).removeClass('visible');
+          }
+        });
+      }
+      $(window).on('scroll', fadeInCheck);
+      fadeInCheck(); 
+
+      
+      var form = $('#feedbackForm');
+      form.on('submit', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        if (form[0].checkValidity() === false) {
+          form.addClass('was-validated');
+          
+        } else {
+          
+          $('.btn-gold').css('box-shadow', '0 0 25px #C19A6B').delay(200).queue(function(next){
+            $(this).css('box-shadow', '0 0 20px rgba(193,154,107,0.6)');
+            next();
+          });
+          
+          form.removeClass('was-validated');
+          
+          alert('Thank you for your valuable feedback!');
+          form[0].reset();
+        }
+      });
+
+       $('.btn-gold').hover(
+        function() { $(this).addClass('hover-glow'); },
+        function() { $(this).removeClass('hover-glow'); }
+      );
+    });
+  </script>
+</body>
+</html>

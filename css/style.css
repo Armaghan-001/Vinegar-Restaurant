@@ -6,8 +6,8 @@
   --white: #ffffff;
   --font-royal: 'Forum', serif;
   --font-body: 'DM Sans', sans-serif;
-  /* Supporting colors for smooth transition */
-  --black-alpha-80: rgba(0, 0, 0, 0.8);
+  --primary-burgundy: #800020;
+  --camel-accent: #C19A6B;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -16,113 +16,97 @@ body {
     font-family: var(--font-body); 
     background: var(--smoky-black-1); 
     color: var(--white);
+    overflow-x: hidden;
 }
 
-
-/* --- NAVBAR SETUP --- */
-/* NAVBAR BASE STYLING */
-/* Navbar Variables */
-:root {
-    --primary-burgundy: #800020;
-    --camel-accent: #C19A6B;
-    --text-white: #ffffff;
-}
-
-/* Base Styling */
+/* --- NAVBAR --- */
 .navbar {
-    padding: 15px 0;
-    transition: all 0.4s ease;
-    background: rgba(0, 0, 0, 0.3);
-    border-bottom: 1px solid rgba(193, 154, 107, 0.1);
+    padding: 20px 0;
+    transition: all 0.5s ease-in-out;
+    background: transparent; /* Starting transparent */
+    border-bottom: 1px solid rgba(228, 197, 144, 0.1);
     z-index: 1000;
 }
 
-/* Scroll Effect Class (JS se control hoga) */
-/* Logo size ko control karne ke liye */
+/* Scroll hone par black background */
+.navbar.scrolled {
+    background: #000000 !important;
+    padding: 10px 0;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    border-bottom: 1px solid var(--gold-crayola);
+}
+
 .navbar-brand img {
-    height: 50px; /* Aap isko 40px ya 60px bhi kar sakte hain apni pasand ke mutabiq */
-    width: auto;  /* Width automatically adjust ho jayegi */
-    object-fit: contain;
+    height: 50px;
     transition: all 0.4s ease;
 }
 
-/* Jab page scroll ho to logo thoda aur chota ho jaye (Optional premium effect) */
-.navbar.scrolled .navbar-brand img {
-    height: 40px;
-}
 .brand-text {
-    color: var(--camel-accent) !important;
+    color: var(--gold-crayola) !important;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     letter-spacing: 2px;
 }
 
 .nav-link {
-    color: var(--text-white) !important;
+    color: var(--white) !important;
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin: 0 8px;
-    position: relative;
     transition: color 0.3s;
 }
 
-/* Hover & Active State */
-.active-link, .nav-link:hover {
-    color: var(--camel-accent) !important;
+.nav-link:hover, .active-link {
+    color: var(--gold-crayola) !important;
 }
 
-/* Underline Animation */
-.nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: var(--camel-accent);
-    transition: width 0.3s ease;
+/* --- GOLDEN TITLES & TEXT --- */
+.golden-title {
+    font-family: var(--font-royal);
+    color: var(--gold-crayola) !important;
 }
 
-.nav-link:hover::after, .active-link::after {
-    width: 100%;
+.golden-subheading {
+    color: var(--gold-crayola);
+    font-weight: 700;
 }
 
-.navbar-toggler {
-    border: 1px solid var(--camel-accent);
+.golden-text {
+    color: var(--gold-crayola);
 }
+
+.bold-golden-text {
+    color: var(--gold-crayola);
+    font-weight: 700;
+    font-size: 1.2rem;
+    font-family: var(--font-royal);
+}
+
+.text-bright {
+    color: rgba(255, 255, 255, 0.95) !important; /* Made text brighter and clearer */
+    line-height: 1.8;
+}
+
 /* --- HERO SECTION --- */
-/* --- GRILLI STYLE HERO WITH ZOOM-IN SLIDER --- */
-/* --- FULL CENTERED HERO STYLE --- */
 .hero {
-    height: 140vh;
+    height: 100vh;
     position: relative;
     overflow: hidden;
-    background-color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Poore content ko page ke beech mein lane ke liye */
-    text-align: center;      /* Text ko center karne ke liye */
 }
 
-.hero-slider {
+.hero-slider, .slide {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 1;
 }
 
-/* Individual Slides - Zoom In Effect */
 .slide {
-    position: absolute;
-    width: 100%; height: 100%;
     background-size: cover;
     background-position: center;
     opacity: 0;
-    transform: scale(1);
     animation: kenBurnsZoomIn 18s linear infinite;
 }
 
-/* Slide Timings */
 .slide:nth-child(1) { animation-delay: 0s; }
 .slide:nth-child(2) { animation-delay: 6s; }
 .slide:nth-child(3) { animation-delay: 12s; }
@@ -131,104 +115,91 @@ body {
     0% { opacity: 0; transform: scale(1); }
     10% { opacity: 1; }
     33% { opacity: 1; }
-    43% { opacity: 0; transform: scale(1.15); }
+    43% { opacity: 0; transform: scale(1.1); }
     100% { opacity: 0; }
 }
 
-/* Dark Overlay - Text ko saaf dikhane ke liye */
 .hero::after {
     content: '';
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Center alignment ke liye simple overlay behtar hai */
+    background: rgba(0, 0, 0, 0.6);
     z-index: 2;
 }
 
-/* --- TEXT CONTENT STYLING (CENTERED) --- */
-.hero-content {
-    position: relative;
-    z-index: 3;
-    color: var(--white);
-    padding: 0 20px;
-}
-
-.subtitle-wrapper {
-    color: var(--gold-crayola);
-    font-weight: 600;
-    letter-spacing: 5px;
-    font-size: 14px;
-    font-style: italic;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Stars ko center karne ke liye */
-    gap: 15px;
-}
+.hero-content { position: relative; z-index: 3; }
 
 .main-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 5vw, 5.5rem);
-    line-height: 1.1;
-    font-weight: 700;
-    margin-bottom: 10px;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    color: var(--white);
 }
 
-.main-title span {
-    font-style: italic;
-    display: block;
-    color: var(--gold-crayola);
-}
-
-.hero-desc {
-    font-size: 18px;
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 600px;
-    margin: 0 auto; /* Left aur Right dono auto taake center ho jaye */
-}
+.main-title span { color: var(--gold-crayola); font-style: italic; }
 
 .btn-outline-gold {
     border: 1px solid var(--gold-crayola);
     color: var(--gold-crayola);
-    background: transparent;
-    padding: 12px 35px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
     transition: 0.4s;
-    text-decoration: none;
-    display: inline-block;
 }
 
 .btn-outline-gold:hover {
     background: var(--gold-crayola);
     color: #000;
 }
+
+/* --- BUTTONS --- */
+.btn-burgundy {
+    background: var(--primary-burgundy);
+    color: var(--gold-crayola);
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-weight: bold;
+}
+
+.btn-burgundy:hover {
+    background: #a00028;
+    color: white;
+}
+
+.btn-reserve {
+    background: var(--gold-crayola);
+    color: #000;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.btn-reserve:hover {
+    background: #fff;
+    transform: scale(1.02);
+}
+
 /* --- DISH CARDS --- */
 .dish-card {
     background: var(--eerie-black);
     border: 1px solid rgba(228, 197, 144, 0.2);
-    border-radius: 20px;
-    overflow: hidden;
-    transition: all 0.4s ease;
+    border-radius: 15px;
+    transition: 0.4s;
 }
 
+.dish-card:hover { transform: translateY(-10px); border-color: var(--gold-crayola); }
+
 .dish-price {
+    position: absolute;
+    top: 15px; right: 15px;
     background: var(--gold-crayola);
-    color: var(--smoky-black-1);
+    color: #000;
     padding: 5px 15px;
-    border-radius: 50px;
+    border-radius: 20px;
     font-weight: bold;
 }
 
-.dish-info h4 {
-    font-family: var(--font-royal);
-    color: var(--gold-crayola);
-}
+.dish-img-container { position: relative; overflow: hidden; border-top-left-radius: 15px; border-top-right-radius: 15px; }
 
-.dish-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--gold-crayola);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-}
+/* --- RESERVATION --- */
+.reservation-section { background: var(--eerie-black); }
+.reservation-form { background: rgba(255,255,255,0.02); border: 1px solid rgba(228, 197, 144, 0.3); }
 
 /* --- FOOTER --- */
 .main-footer {
@@ -297,4 +268,158 @@ body {
 .newsletter-box button {
     color: var(--gold-crayola);
 
+}
+/* Scroll Button - Burgundy */
+#scrollToTop {
+    background: var(--primary-burgundy);
+    color: #fff;
+    width: 45px; height: 45px;
+    border-radius: 5px;
+    display: flex; justify-content: center; align-items: center;
+    position: fixed; bottom: 20px; right: 20px;
+    opacity: 0; visibility: hidden; transition: 0.4s;
+    z-index: 999;
+}
+#scrollToTop.active { opacity: 1; visibility: visible; }
+#scrollToTop:hover { background: var(--camel-accent); color: #000; }
+
+.reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+/* 1. Signature Creation Image Fix */
+.menu-item {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--camel-accent);
+    height: 300px; /* Sab images ki height barabar */
+}
+
+.menu-img-container {
+    width: 100%;
+    height: 100%;
+}
+
+.menu-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Yeh image ko kharab hone se bachayega aur fix rakhega */
+    transition: transform 0.5s ease;
+}
+
+.menu-item:hover img {
+    transform: scale(1.1);
+}
+
+.menu-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    text-align: center;
+}
+
+/* 2. Premium Booking Form Styling */
+.booking-form {
+    background: rgba(26, 26, 26, 0.8);
+    border: 1px solid var(--camel-accent);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+.custom-input {
+    background: transparent !important;
+    border: none;
+    border-bottom: 1px solid #444 !important;
+    color: white !important;
+    border-radius: 0;
+    padding: 12px 5px;
+}
+
+.custom-input:focus {
+    box-shadow: none;
+    border-bottom-color: var(--camel-accent) !important;
+}
+
+.custom-input option {
+    background: var(--card-bg);
+}
+
+/* 3. Enhanced Preloader with Loading Bar */
+.loader-bar {
+    width: 200px;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    margin-top: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.loader-progress {
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background: var(--camel-accent);
+    animation: loadingWidth 2s forwards ease-in-out;
+}
+
+@keyframes loadingWidth {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* 4. Responsive Fixes */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2.5rem; }
+    .hero-content p { font-size: 1rem; }
+    section { padding: 60px 0; }
+    .menu-item { height: 250px; }
+}
+/* =========================================
+   NEW UPDATED FIXES (About, Form, & Footer)
+   ========================================= */
+
+/* 1. About Section Image Fix: Is se pic border ke andar rahegi */
+.about-img-wrapper {
+    border: 1px solid var(--camel-accent);
+    padding: 10px;
+    border-radius: 4px;
+    overflow: hidden; /* Pic bahar nahi nikalne dega */
+    display: flex;
+}
+
+.about-img-wrapper img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover; /* Image ko stretch hone se bachayega */
+    transition: transform 0.5s ease;
+}
+
+/* 2. Form Input Visibility: Name aur Email ko "Event Type" jaisa bright karega */
+.custom-input::placeholder {
+    color: #ffffff !important;
+    opacity: 1 !important; /* Full visibility */
+    font-weight: 400;
+}
+
+/* Date Field Styling */
+.custom-date-wrapper {
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+}
+
+/* Date se year hide karne ke liye (Chrome/Edge) */
+.date-no-year::-webkit-datetime-edit-year-field {
+    display: none !important;
+}
+.date-no-year::-webkit-datetime-edit-text:last-child {
+    display: none !important;
+}
+
+/* 3. Footer Gap Fix: Description aur Links mein fasla */
+.footer-desc {
+    margin-right: 45px; /* Quick links se door karne ke liye */
+    line-height: 1.8;
+    text-align: justify;
+    color: var(--text-grey);
 }

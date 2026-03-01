@@ -1,23 +1,21 @@
 $(document).ready(function() {
+    // Navbar background change on scroll
     $(window).scroll(function() {
-        // Agar page 50px se niche scroll ho toh 'scrolled' class add karein
-        if ($(this).scrollTop() > 50) {
+        if ($(this).scrollTop() > 80) {
             $('.navbar').addClass('scrolled');
         } else {
             $('.navbar').removeClass('scrolled');
         }
     });
+
+    // Smooth Scrolling for links
+    $('a.nav-link').on('click', function(event) {
+        if (this.hash !== "") {
+            event.preventDefault();
+            var hash = this.hash;
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top - 70
+            }, 800);
+        }
+    });
 });
-
-function scrollManual(distance) {
-    const scroller = document.getElementById('topScroller');
-    if (scroller) {
-        scroller.scrollBy({
-            left: distance,
-            behavior: 'smooth'
-        });
-    }
-}
-
-
-

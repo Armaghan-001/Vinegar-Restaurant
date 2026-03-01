@@ -246,38 +246,94 @@ body {
     transform: translateY(0);
 }
 
-/* 5. FOOTER ENHANCEMENTS */
-.footer-premium {
-    position: relative;
-    padding: 80px 0 20px;
-    background: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=40&w=800');
-    background-size: cover;
-    background-position: center;
-    border-top: 2px solid var(--gold);
+/ footer {
+            background-color: var(--charcoal);
+            color: #888;
+            padding: 80px 0 30px;
+        }
+        .footer-logo { 
+            color: var(--white); 
+            font-size: 1.5rem; 
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif; /* Ensure consistent logo font */
+            display: flex; /* Align logo and text */
+            align-items: center;
+            gap: 10px; /* Space between logo and text */
+        }
+        .footer-logo img {
+            height: 40px; /* Adjust as needed */
+            /* filter: invert(1); */ /* Apply if your logo is dark and needs to be white on dark background */
+        }
+        .footer-logo-text {
+            color: var(--white); /* Ensure footer logo text is white */
+        }
+        .footer-links a { color: #888; text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
+        .footer-links a:hover { color: var(--gold); }
+
+        /* 11. SCROLL TO TOP */
+        #scrollTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--maroon);
+            color: white;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+            border: none;
+            transition: 0.3s;
+        }
+        #scrollTop:hover { background: var(--gold); }
+
+        @media (max-width: 991px) {
+            .navbar-brand { position: relative; left: 0; transform: none; }
+            .navbar-nav { background: var(--charcoal); padding: 20px; text-align: center; }
+            .hero-title { font-size: 2.5rem; }
+            .navbar-brand img { height: 30px; } /* Smaller logo on mobile */
+            .preloader-logo-container img { height: 60px; }
+        }
+        /* ============================= */
+/* ===== FINAL RESPONSIVE FIXES ===== */
+/* ============================= */
+
+/* Hero Section Mobile Fix */
+.hero-section {
+    min-height: 100vh;
+    height: auto;
+    padding: 120px 20px;
 }
 
-.footer-overlay {
-    position: absolute; inset: 0;
-    background: rgba(16, 17, 18, 0.95);
+/* About & Culinary Images Fully Responsive */
+.about-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
 }
 
-.footer-links li { list-style: none; margin-bottom: 10px; }
-
-.footer-links li a {
-    color: #bbb;
-    text-decoration: none;
-    transition: 0.3s;
+/* Mobile spacing for images */
+@media (max-width: 991px) {
+    .about-image {
+        margin-top: 30px;
+    }
 }
 
-.footer-links li a:hover {
-    color: var(--gold);
-    text-shadow: 0 0 10px var(--gold);
-    padding-left: 8px;
+/* Stats Font Size Adjustment */
+@media (max-width: 576px) {
+    .stat-number {
+        font-size: 2rem;
+    }
 }
 
-/* Responsive */
+/* Footer Alignment Mobile Fix */
 @media (max-width: 768px) {
-    .section-title { font-size: 2.5rem; }
-    .hero-content h1 { font-size: 3rem; }
-    .slider-controls button { width: 40px; height: 40px; font-size: 18px; }
+    footer .text-end {
+        text-align: center !important;
+        margin-top: 20px;
+    }
 }
+
